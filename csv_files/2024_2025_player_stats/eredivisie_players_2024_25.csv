@@ -1,5 +1,4 @@
-Empty,Empty,Empty,Empty,Empty,Empty,Empty,Playing Time,Playing Time,Playing Time,Playing Time,Performance,Performance,Performance,Performance,Performance,Performance,Performance,Performance,Expected,Expected,Expected,Expected,Progression,Progression,Progression,Per 90 Minutes,Per 90 Minutes,Per 90 Minutes,Per 90 Minutes,Per 90 Minutes,Per 90 Minutes,Per 90 Minutes,Per 90 Minutes,Per 90 Minutes,Per 90 Minutes,Matches,League,Season
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,,
+Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,League,Season
 1,Uriel van Aalst,,FW,Willem II,,,1,0,28,0.3,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,1,1,1,0.00,0.00,0.00,0.00,0.00,0.00,0.10,0.10,0.00,0.10,Matches,Eredivisie,2024/25
 2,Patrick van Aanholt,nl NED,DF,Sparta R'dam,33,1990,21,20,"1,656",18.4,0,0,0,0,0,0,4,0,0.6,0.6,1.3,1.9,39,86,64,0.00,0.00,0.00,0.00,0.00,0.04,0.07,0.11,0.04,0.11,Matches,Eredivisie,2024/25
 3,Paxten Aaronson,us USA,"MF,FW",Utrecht,20,2003,33,30,"2,689",29.9,8,4,12,8,0,0,8,0,5.3,5.3,2.9,8.2,51,116,80,0.27,0.13,0.40,0.27,0.40,0.18,0.10,0.28,0.18,0.28,Matches,Eredivisie,2024/25
@@ -25,7 +24,6 @@ Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,
 23,Youri Baas,nl NED,DF,Ajax,21,2003,23,23,"2,040",22.7,1,0,1,1,0,0,2,0,0.7,0.7,0.3,1.0,18,115,6,0.04,0.00,0.04,0.04,0.04,0.03,0.01,0.04,0.03,0.04,Matches,Eredivisie,2024/25
 24,Isaac Babadi,nl NED,MF,PSV Eindhoven,19,2005,8,1,175,1.9,1,0,1,1,0,0,0,0,0.7,0.7,0.4,1.1,14,32,11,0.51,0.00,0.51,0.51,0.51,0.36,0.18,0.54,0.36,0.54,Matches,Eredivisie,2024/25
 25,Leandro Bacuna,cw CUW,"DF,MF",Groningen,32,1991,31,25,"2,330",25.9,4,3,7,1,3,4,8,0,4.8,1.7,2.9,4.6,44,97,100,0.15,0.12,0.27,0.04,0.15,0.19,0.11,0.30,0.06,0.18,Matches,Eredivisie,2024/25
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,Eredivisie,2024/25
 26,Thibo Baeten,be BEL,"MF,FW",Go Ahead Eag,22,2002,1,0,12,0.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,1,1,4,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,Matches,Eredivisie,2024/25
 27,Esmir Bajraktarevic,ba BIH,"FW,DF",PSV Eindhoven,19,2005,4,0,24,0.3,0,0,0,0,0,0,0,0,0.1,0.1,0.0,0.1,3,1,3,0.00,0.00,0.00,0.00,0.00,0.50,0.00,0.50,0.50,0.50,Matches,Eredivisie,2024/25
 28,Saïd Bakari,km COM,DF,Sparta R'dam,29,1994,26,24,"2,144",23.8,1,0,1,1,0,0,3,0,0.7,0.7,0.6,1.2,44,106,64,0.04,0.00,0.04,0.04,0.04,0.03,0.02,0.05,0.03,0.05,Matches,Eredivisie,2024/25
@@ -51,7 +49,6 @@ Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,
 48,Gijs Besselink,nl NED,MF,Twente,20,2004,13,3,321,3.6,0,0,0,0,0,0,2,0,0.0,0.0,0.1,0.1,3,12,3,0.00,0.00,0.00,0.00,0.00,0.00,0.01,0.01,0.00,0.01,Matches,Eredivisie,2024/25
 49,Daniel Bielica,pl POL,GK,NAC Breda,25,1999,32,32,"2,880",32.0,0,0,0,0,0,0,2,0,0.0,0.0,0.0,0.0,0,1,0,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,Matches,Eredivisie,2024/25
 50,Justin Bijlow,nl NED,GK,Feyenoord,26,1998,4,4,360,4.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0,0,0,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,Matches,Eredivisie,2024/25
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,Eredivisie,2024/25
 51,Adrian Blake,eng ENG,"FW,MF",Utrecht,19,2005,17,2,468,5.2,3,2,5,3,0,0,1,0,0.8,0.8,2.0,2.8,16,17,44,0.58,0.38,0.96,0.58,0.96,0.16,0.38,0.54,0.16,0.54,Matches,Eredivisie,2024/25
 52,Thijmen Blokzijl,nl NED,DF,Groningen,19,2005,28,25,"2,226",24.7,1,0,1,1,0,0,1,1,1.0,1.0,0.0,1.1,10,78,1,0.04,0.00,0.04,0.04,0.04,0.04,0.00,0.04,0.04,0.04,Matches,Eredivisie,2024/25
 53,Ofosu Boakye,,FW,Go Ahead Eag,,,1,0,4,0.0,0,0,0,0,0,0,0,0,0.9,0.9,0.0,0.9,0,0,2,0.00,0.00,0.00,0.00,0.00,21.21,0.00,21.21,21.21,21.21,Matches,Eredivisie,2024/25
@@ -77,7 +74,6 @@ Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,
 73,Max Bruns,nl NED,DF,Twente,21,2002,23,19,"1,635",18.2,0,1,1,0,0,0,3,0,0.7,0.7,0.6,1.3,23,81,3,0.00,0.06,0.06,0.00,0.06,0.04,0.03,0.07,0.04,0.07,Matches,Eredivisie,2024/25
 74,Thomas Bruns,nl NED,"MF,FW",Heracles Almelo,32,1992,22,14,"1,155",12.8,3,2,5,3,0,0,5,0,2.6,2.6,2.6,5.2,18,40,42,0.23,0.16,0.39,0.23,0.39,0.20,0.20,0.40,0.20,0.40,Matches,Eredivisie,2024/25
 75,Charles-Andréas Brym,ca CAN,"FW,MF",Sparta R'dam,25,1998,12,2,308,3.4,0,1,1,0,0,0,0,0,1.8,1.8,1.1,2.9,7,3,25,0.00,0.29,0.29,0.00,0.29,0.54,0.31,0.85,0.54,0.85,Matches,Eredivisie,2024/25
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,Eredivisie,2024/25
 76,Charles-Andréas Brym,ca CAN,FW,Almere City,25,1998,17,16,"1,289",14.3,3,2,5,3,0,0,1,0,4.0,4.0,1.5,5.5,18,27,62,0.21,0.14,0.35,0.21,0.35,0.28,0.10,0.38,0.28,0.38,Matches,Eredivisie,2024/25
 77,Hugo Bueno,es ESP,DF,Feyenoord,21,2002,20,14,"1,197",13.3,0,3,3,0,0,0,1,0,0.5,0.5,2.5,3.0,61,48,79,0.00,0.23,0.23,0.00,0.23,0.03,0.19,0.22,0.03,0.22,Matches,Eredivisie,2024/25
 78,Thomas Buitink,nl NED,"FW,MF",Zwolle,24,2000,13,2,246,2.7,0,0,0,0,0,0,0,0,1.1,1.1,0.2,1.3,2,5,16,0.00,0.00,0.00,0.00,0.00,0.39,0.08,0.47,0.39,0.47,Matches,Eredivisie,2024/25
@@ -103,7 +99,6 @@ Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,
 98,Argyrios Darelas,gr GRE,"MF,FW",NEC Nijmegen,20,2003,5,0,41,0.5,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0,3,1,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,Matches,Eredivisie,2024/25
 99,Brynjolfur Darri Willumsson,is ISL,FW,Groningen,23,2000,29,6,960,10.7,4,1,5,4,0,0,2,1,2.0,2.0,1.9,3.9,8,18,68,0.37,0.09,0.47,0.37,0.47,0.19,0.18,0.36,0.19,0.36,Matches,Eredivisie,2024/25
 100,Jari De Busser,be BEL,GK,Go Ahead Eag,24,1999,16,16,"1,440",16.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0,0,0,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,Matches,Eredivisie,2024/25
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,Eredivisie,2024/25
 101,Brian De Keersmaecker,be BEL,MF,Heracles Almelo,24,2000,31,31,"2,722",30.2,5,3,8,2,3,3,3,1,4.0,1.6,3.4,5.0,45,168,43,0.17,0.10,0.26,0.07,0.17,0.13,0.11,0.24,0.05,0.17,Matches,Eredivisie,2024/25
 102,Mats Deijl,nl NED,DF,Go Ahead Eag,27,1997,34,34,"3,060",34.0,4,1,5,2,2,2,2,0,4.8,3.2,2.3,5.5,31,112,102,0.12,0.03,0.15,0.06,0.09,0.14,0.07,0.21,0.09,0.16,Matches,Eredivisie,2024/25
 103,Maxim Dekker,nl NED,DF,AZ Alkmaar,20,2004,11,7,589,6.5,0,0,0,0,0,0,1,1,0.0,0.0,0.1,0.1,12,35,4,0.00,0.00,0.00,0.00,0.00,0.00,0.01,0.01,0.00,0.01,Matches,Eredivisie,2024/25
@@ -129,7 +124,6 @@ Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,
 123,Laros Duarte,cv CPV,MF,Groningen,27,1997,1,0,20,0.2,0,0,0,0,0,0,0,0,0.0,0.0,0.1,0.1,0,3,0,0.00,0.00,0.00,0.00,0.00,0.07,0.54,0.61,0.07,0.61,Matches,Eredivisie,2024/25
 124,Oliver Edvardsen,no NOR,FW,Ajax,25,1999,11,1,290,3.2,4,0,4,4,0,0,1,0,2.4,2.4,0.5,2.8,7,15,31,1.24,0.00,1.24,1.24,1.24,0.74,0.14,0.88,0.74,0.88,Matches,Eredivisie,2024/25
 125,Oliver Edvardsen,no NOR,"FW,MF",Go Ahead Eag,25,1999,14,10,888,9.9,8,3,11,8,0,0,1,0,6.1,6.1,1.4,7.5,24,28,56,0.81,0.30,1.11,0.81,1.11,0.62,0.14,0.76,0.62,0.76,Matches,Eredivisie,2024/25
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,Eredivisie,2024/25
 126,Victor Edvardsen,se SWE,"FW,MF",Go Ahead Eag,28,1996,34,32,"2,740",30.4,8,6,14,8,0,0,4,0,10.4,10.4,6.7,17.1,51,93,204,0.26,0.20,0.46,0.26,0.46,0.34,0.22,0.56,0.34,0.56,Matches,Eredivisie,2024/25
 127,Espen van Ee,nl NED,MF,Heerenveen,21,2003,32,24,"2,236",24.8,1,2,3,1,0,0,5,0,1.4,1.4,1.1,2.5,25,104,47,0.04,0.08,0.12,0.04,0.12,0.06,0.05,0.10,0.06,0.10,Matches,Eredivisie,2024/25
 128,Mike Eerdhuijzen,nl NED,DF,Sparta R'dam,24,2000,32,32,"2,803",31.1,1,0,1,1,0,0,7,1,0.9,0.9,0.5,1.5,31,194,10,0.03,0.00,0.03,0.03,0.03,0.03,0.02,0.05,0.03,0.05,Matches,Eredivisie,2024/25
@@ -155,7 +149,6 @@ Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,
 148,Carlos Forbs,pt POR,FW,Ajax,20,2004,1,0,33,0.4,0,0,0,0,0,0,0,0,0.0,0.0,0.2,0.2,5,3,3,0.00,0.00,0.00,0.00,0.00,0.00,0.45,0.45,0.00,0.45,Matches,Eredivisie,2024/25
 149,Ryan Fosso,ch SUI,MF,Fortuna Sittard,22,2002,30,30,"2,551",28.3,1,1,2,1,0,0,6,0,1.6,1.6,2.8,4.4,17,86,20,0.04,0.04,0.07,0.04,0.07,0.06,0.10,0.16,0.06,0.16,Matches,Eredivisie,2024/25
 150,Oscar Fraulo,dk DEN,MF,Utrecht,20,2003,27,19,"1,711",19.0,3,3,6,3,0,0,3,0,2.1,2.1,3.1,5.2,26,63,76,0.16,0.16,0.32,0.16,0.32,0.11,0.16,0.27,0.11,0.27,Matches,Eredivisie,2024/25
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,Eredivisie,2024/25
 151,Anton Gaaei,dk DEN,DF,Ajax,21,2002,25,19,"1,781",19.8,3,4,7,3,0,0,5,1,1.7,1.7,4.3,6.0,64,88,157,0.15,0.20,0.35,0.15,0.35,0.09,0.22,0.30,0.09,0.30,Matches,Eredivisie,2024/25
 152,Matt Garbett,nz NZL,"FW,MF",NAC Breda,22,2002,12,8,580,6.4,1,0,1,1,0,0,0,0,0.7,0.7,0.1,0.8,10,13,22,0.16,0.00,0.16,0.16,0.16,0.11,0.01,0.13,0.11,0.13,Matches,Eredivisie,2024/25
 153,Anselmo García MacNulty,ie IRL,DF,Zwolle,21,2003,34,34,"3,060",34.0,1,0,1,1,0,0,2,0,2.4,2.4,0.7,3.1,24,137,16,0.03,0.00,0.03,0.03,0.03,0.07,0.02,0.09,0.07,0.09,Matches,Eredivisie,2024/25
@@ -181,7 +174,6 @@ Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,
 173,Anis Hadj Moussa,dz ALG,"FW,MF",Feyenoord,22,2002,30,22,"1,969",21.9,8,3,11,8,0,0,4,0,3.2,3.2,5.0,8.2,110,96,209,0.37,0.14,0.50,0.37,0.50,0.15,0.23,0.37,0.15,0.37,Matches,Eredivisie,2024/25
 174,Alen Halilović,hr CRO,"MF,FW",Fortuna Sittard,28,1996,27,23,"1,770",19.7,2,3,5,2,0,1,2,0,4.4,3.6,2.8,6.4,37,64,60,0.10,0.15,0.25,0.10,0.25,0.23,0.14,0.37,0.19,0.33,Matches,Eredivisie,2024/25
 175,Denzel Hall,nl NED,DF,Heerenveen,23,2001,18,5,564,6.3,0,0,0,0,0,0,2,0,0.0,0.0,0.4,0.4,4,38,9,0.00,0.00,0.00,0.00,0.00,0.01,0.06,0.07,0.01,0.07,Matches,Eredivisie,2024/25
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,Eredivisie,2024/25
 176,Sébastien Haller,ci CIV,FW,Utrecht,30,1994,16,15,"1,269",14.1,4,1,5,4,0,0,0,0,5.8,5.8,1.9,7.7,9,38,70,0.28,0.07,0.35,0.28,0.35,0.41,0.14,0.55,0.41,0.55,Matches,Eredivisie,2024/25
 177,Dávid Hancko,sk SVK,DF,Feyenoord,26,1997,32,32,"2,880",32.0,3,1,4,3,0,0,5,0,4.9,4.9,3.9,8.8,59,224,58,0.09,0.03,0.12,0.09,0.12,0.15,0.12,0.27,0.15,0.27,Matches,Eredivisie,2024/25
 178,Kornelius Hansen,no NOR,"FW,MF",Almere City,23,2001,33,20,"1,888",21.0,2,2,4,2,0,0,0,0,4.6,4.6,1.5,6.1,46,33,135,0.10,0.10,0.19,0.10,0.19,0.22,0.07,0.29,0.22,0.29,Matches,Eredivisie,2024/25
@@ -207,7 +199,6 @@ Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,
 198,Hwang In-beom,kr KOR,MF,Feyenoord,27,1996,21,20,"1,618",18.0,3,2,5,3,0,0,5,0,1.0,1.0,3.8,4.8,23,112,50,0.17,0.11,0.28,0.17,0.28,0.05,0.21,0.26,0.05,0.26,Matches,Eredivisie,2024/25
 199,Zidane Iqbal,iq IRQ,MF,Utrecht,21,2003,18,18,"1,449",16.1,1,0,1,1,0,0,3,0,0.6,0.6,1.0,1.6,15,106,11,0.06,0.00,0.06,0.06,0.06,0.04,0.06,0.10,0.04,0.10,Matches,Eredivisie,2024/25
 200,Luka Ivanušec,hr CRO,"FW,MF",Feyenoord,25,1998,13,5,482,5.4,1,0,1,1,0,0,0,0,1.2,1.2,0.5,1.7,19,24,39,0.19,0.00,0.19,0.19,0.19,0.23,0.10,0.32,0.23,0.32,Matches,Eredivisie,2024/25
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,Eredivisie,2024/25
 201,Joey Jacobs,nl NED,DF,Almere City,24,2000,19,13,"1,169",13.0,1,0,1,1,0,0,1,1,0.8,0.8,0.2,0.9,6,39,3,0.08,0.00,0.08,0.08,0.08,0.06,0.01,0.07,0.06,0.07,Matches,Eredivisie,2024/25
 202,Alireza Jahanbakhsh,ir IRN,"FW,MF",Heerenveen,30,1993,19,16,"1,451",16.1,3,2,5,2,1,1,3,0,3.5,2.8,3.5,6.2,33,82,158,0.19,0.12,0.31,0.12,0.25,0.22,0.21,0.43,0.17,0.39,Matches,Eredivisie,2024/25
 203,Alexander Jakobsen,eg EGY,"FW,MF",RKC Waalwijk,30,1994,5,0,70,0.8,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,2,2,5,0.00,0.00,0.00,0.00,0.00,0.03,0.00,0.03,0.03,0.03,Matches,Eredivisie,2024/25
@@ -233,7 +224,6 @@ Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,
 223,Rick Karsdorp,nl NED,DF,PSV Eindhoven,29,1995,12,7,678,7.5,0,2,2,0,0,0,1,0,0.0,0.0,1.7,1.8,9,55,25,0.00,0.27,0.27,0.00,0.27,0.01,0.23,0.23,0.01,0.23,Matches,Eredivisie,2024/25
 224,Neraysho Kasanwirjo,nl NED,DF,Feyenoord,22,2002,2,1,113,1.3,0,0,0,0,0,0,0,0,0.1,0.1,0.2,0.3,1,12,2,0.00,0.00,0.00,0.00,0.00,0.10,0.16,0.25,0.10,0.25,Matches,Eredivisie,2024/25
 225,Denso Kasius,nl NED,DF,AZ Alkmaar,21,2002,30,13,"1,356",15.1,3,3,6,3,0,0,2,0,1.5,1.5,3.9,5.4,58,39,116,0.20,0.20,0.40,0.20,0.40,0.10,0.26,0.36,0.10,0.36,Matches,Eredivisie,2024/25
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,Eredivisie,2024/25
 226,Adam Kayed,ps PLE,"MF,DF",NAC Breda,22,2002,16,5,466,5.2,1,0,1,1,0,0,0,0,0.6,0.6,0.2,0.8,17,8,32,0.19,0.00,0.19,0.19,0.19,0.11,0.05,0.16,0.11,0.16,Matches,Eredivisie,2024/25
 227,Dennis Kaygin,de GER,MF,Willem II,20,2004,9,1,232,2.6,0,1,1,0,0,0,0,0,0.0,0.0,0.2,0.2,1,8,8,0.00,0.39,0.39,0.00,0.39,0.00,0.08,0.08,0.00,0.08,Matches,Eredivisie,2024/25
 228,Emilio Kehrer,de GER,"FW,MF",Willem II,22,2002,23,9,979,10.9,1,3,4,1,0,0,1,0,1.7,1.7,1.7,3.4,23,13,77,0.09,0.28,0.37,0.09,0.37,0.15,0.16,0.31,0.15,0.31,Matches,Eredivisie,2024/25
@@ -259,7 +249,6 @@ Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,
 248,Filip Krastev,bg BUL,"FW,MF",Zwolle,22,2001,31,26,"2,174",24.2,6,4,10,6,0,0,6,0,3.9,3.9,4.4,8.3,73,90,136,0.25,0.17,0.41,0.25,0.41,0.16,0.18,0.34,0.16,0.34,Matches,Eredivisie,2024/25
 249,Wessel Kuhn,nl NED,DF,PSV Eindhoven,17,2006,1,0,13,0.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0,0,1,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,Matches,Eredivisie,2024/25
 250,Roy Kuijpers,nl NED,"FW,MF",NAC Breda,24,2000,9,3,235,2.6,0,0,0,0,0,0,0,0,0.8,0.8,0.3,1.1,10,4,15,0.00,0.00,0.00,0.00,0.00,0.31,0.10,0.41,0.31,0.41,Matches,Eredivisie,2024/25
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,Eredivisie,2024/25
 251,Bas Kuipers,nl NED,DF,Twente,29,1994,30,20,"1,724",19.2,3,3,6,3,0,0,2,1,2.0,2.0,3.0,5.0,25,72,104,0.16,0.16,0.31,0.16,0.31,0.10,0.16,0.26,0.10,0.26,Matches,Eredivisie,2024/25
 252,Luka Kulenović,ba BIH,FW,Heracles Almelo,24,1999,24,15,"1,457",16.2,9,2,11,9,0,0,0,0,7.0,7.0,1.9,8.9,13,26,63,0.56,0.12,0.68,0.56,0.68,0.43,0.12,0.55,0.43,0.55,Matches,Eredivisie,2024/25
 253,Harry Kuster,nl NED,"FW,MF",Twente,18,2005,2,0,12,0.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,1,0,0,0.00,0.00,0.00,0.00,0.00,0.34,0.00,0.34,0.34,0.34,Matches,Eredivisie,2024/25
@@ -285,7 +274,6 @@ Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,
 273,Evert Linthorst,nl NED,MF,Go Ahead Eag,24,2000,33,31,"2,510",27.9,3,3,6,3,0,0,3,0,0.9,0.9,2.2,3.1,24,173,40,0.11,0.11,0.22,0.11,0.22,0.03,0.08,0.11,0.03,0.11,Matches,Eredivisie,2024/25
 274,Enric Llansana,nl NED,MF,Go Ahead Eag,23,2001,33,31,"2,719",30.2,4,3,7,4,0,0,4,1,2.1,2.1,3.4,5.5,35,171,34,0.13,0.10,0.23,0.13,0.23,0.07,0.11,0.18,0.07,0.18,Matches,Eredivisie,2024/25
 275,Chris Lokesa,be BEL,"FW,MF",RKC Waalwijk,19,2004,19,11,"1,012",11.2,3,1,4,3,0,0,3,0,2.7,2.7,0.9,3.6,39,38,68,0.27,0.09,0.36,0.27,0.36,0.24,0.08,0.32,0.24,0.32,Matches,Eredivisie,2024/25
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,Eredivisie,2024/25
 276,Tim van de Loo,,MF,RKC Waalwijk,,,27,23,"1,817",20.2,2,1,3,2,0,0,0,0,1.5,1.5,1.9,3.5,30,71,22,0.10,0.05,0.15,0.10,0.15,0.08,0.09,0.17,0.08,0.17,Matches,Eredivisie,2024/25
 277,Marcos López,pe PER,MF,Feyenoord,24,1999,1,1,90,1.0,0,0,0,0,0,0,0,0,0.0,0.0,0.3,0.3,2,3,16,0.00,0.00,0.00,0.00,0.00,0.00,0.26,0.26,0.00,0.26,Matches,Eredivisie,2024/25
 278,Jordan Lotomba,ch SUI,DF,Feyenoord,25,1998,6,6,486,5.4,1,1,2,1,0,0,0,0,0.7,0.7,0.2,0.9,12,15,6,0.19,0.19,0.37,0.19,0.37,0.14,0.04,0.17,0.14,0.17,Matches,Eredivisie,2024/25
@@ -311,7 +299,6 @@ Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,
 298,Faiz Mattoir,km COM,"FW,MF",Almere City,24,2000,11,2,283,3.1,0,0,0,0,0,0,0,0,0.3,0.3,0.4,0.7,12,7,24,0.00,0.00,0.00,0.00,0.00,0.08,0.13,0.22,0.08,0.22,Matches,Eredivisie,2024/25
 299,Faissal Al Mazyani,be BEL,DF,RKC Waalwijk,19,2005,22,18,"1,635",18.2,0,1,1,0,0,0,4,2,0.4,0.4,1.5,1.9,30,65,38,0.00,0.06,0.06,0.00,0.06,0.02,0.08,0.10,0.02,0.10,Matches,Eredivisie,2024/25
 300,Dylan Mbayo,be BEL,"FW,MF",Zwolle,22,2001,34,25,"2,104",23.4,4,7,11,4,0,0,2,0,3.7,3.7,2.7,6.4,116,56,221,0.17,0.30,0.47,0.17,0.47,0.16,0.11,0.27,0.16,0.27,Matches,Eredivisie,2024/25
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,Eredivisie,2024/25
 301,Mexx Meerdink,nl NED,"FW,MF",AZ Alkmaar,21,2003,27,8,906,10.1,9,0,9,9,0,0,2,0,4.4,4.4,0.9,5.3,11,29,73,0.89,0.00,0.89,0.89,0.89,0.44,0.09,0.53,0.44,0.53,Matches,Eredivisie,2024/25
 302,Ringo Meerveld,nl NED,"MF,FW",Willem II,23,2000,33,33,"2,900",32.2,4,2,6,4,0,0,2,0,2.4,2.4,2.3,4.6,70,125,91,0.12,0.06,0.19,0.12,0.19,0.07,0.07,0.14,0.07,0.14,Matches,Eredivisie,2024/25
 303,Aaron Meijers,nl NED,DF,RKC Waalwijk,36,1987,17,9,753,8.4,0,0,0,0,0,0,1,1,0.1,0.1,0.4,0.5,11,28,22,0.00,0.00,0.00,0.00,0.00,0.01,0.05,0.06,0.01,0.06,Matches,Eredivisie,2024/25
@@ -337,7 +324,6 @@ Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,
 323,Alex Mortensen,se SWE,"FW,MF",Groningen,22,2002,2,0,10,0.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0,0,0,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,Matches,Eredivisie,2024/25
 324,David Møller Wolfe,no NOR,DF,AZ Alkmaar,22,2002,31,30,"2,500",27.8,2,5,7,2,0,0,5,1,1.2,1.2,2.3,3.6,85,107,149,0.07,0.18,0.25,0.07,0.25,0.04,0.08,0.13,0.04,0.13,Matches,Eredivisie,2024/25
 325,Chris Nadje,fr FRA,MF,Feyenoord,22,2001,8,1,195,2.2,0,0,0,0,0,0,1,0,0.4,0.4,0.1,0.5,8,6,11,0.00,0.00,0.00,0.00,0.00,0.20,0.03,0.23,0.20,0.23,Matches,Eredivisie,2024/25
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,Eredivisie,2024/25
 326,Adamo Nagalo,bf BFA,DF,PSV Eindhoven,21,2002,6,1,168,1.9,0,0,0,0,0,0,0,0,0.0,0.0,0.1,0.2,1,20,2,0.00,0.00,0.00,0.00,0.00,0.02,0.07,0.09,0.02,0.09,Matches,Eredivisie,2024/25
 327,Adi Nalic,ba BIH,"MF,FW",Almere City,26,1997,22,7,695,7.7,1,0,1,1,0,0,2,0,1.0,1.0,0.3,1.3,16,27,44,0.13,0.00,0.13,0.13,0.13,0.13,0.04,0.17,0.13,0.17,Matches,Eredivisie,2024/25
 328,Younes Namli,dk DEN,"FW,MF",Zwolle,30,1994,18,13,"1,114",12.4,4,2,6,4,0,0,1,1,2.9,2.9,2.2,5.2,43,76,68,0.32,0.16,0.48,0.32,0.48,0.24,0.18,0.42,0.24,0.42,Matches,Eredivisie,2024/25
@@ -363,7 +349,6 @@ Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,
 348,Lucas Oliveira Rosa,br BRA,DF,Ajax,24,2000,5,3,246,2.7,0,1,1,0,0,0,1,0,0.0,0.0,0.2,0.3,9,9,4,0.00,0.37,0.37,0.00,0.37,0.01,0.08,0.10,0.01,0.10,Matches,Eredivisie,2024/25
 349,Simon Olsson,se SWE,MF,Heerenveen,26,1997,12,9,787,8.7,1,1,2,1,0,0,1,0,0.7,0.7,1.7,2.4,6,41,32,0.11,0.11,0.23,0.11,0.23,0.08,0.20,0.28,0.08,0.28,Matches,Eredivisie,2024/25
 350,Basar Onal,tr TUR,"FW,MF",NEC Nijmegen,20,2004,33,11,"1,386",15.4,1,2,3,1,0,0,3,0,3.1,3.1,1.8,4.8,64,28,134,0.06,0.13,0.19,0.06,0.19,0.20,0.11,0.31,0.20,0.31,Matches,Eredivisie,2024/25
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,Eredivisie,2024/25
 351,Diego van Oorschot,nl NED,"MF,FW",Heracles Almelo,18,2005,3,0,24,0.3,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,2,1,2,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,Matches,Eredivisie,2024/25
 352,Thijs Oosting,nl NED,"FW,MF",Groningen,24,2000,22,8,784,8.7,1,0,1,1,0,0,0,0,1.1,1.1,0.8,1.9,10,31,53,0.11,0.00,0.11,0.11,0.11,0.13,0.09,0.21,0.13,0.21,Matches,Eredivisie,2024/25
 353,Fredrik Oppegard,no NOR,DF,PSV Eindhoven,21,2002,6,3,276,3.1,0,0,0,0,0,0,0,0,0.3,0.3,0.6,0.9,16,15,41,0.00,0.00,0.00,0.00,0.00,0.09,0.20,0.29,0.09,0.29,Matches,Eredivisie,2024/25
@@ -389,7 +374,6 @@ Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,
 373,Kristoffer Peterson,se SWE,"FW,MF",Fortuna Sittard,29,1994,30,22,"1,818",20.2,7,2,9,4,3,3,5,0,5.6,3.2,3.5,6.8,87,55,164,0.35,0.10,0.45,0.20,0.30,0.28,0.17,0.45,0.16,0.33,Matches,Eredivisie,2024/25
 374,Hristiyan Petrov,bg BUL,DF,Heerenveen,22,2002,6,4,359,4.0,1,0,1,1,0,0,0,0,0.3,0.3,0.0,0.3,1,11,9,0.25,0.00,0.25,0.25,0.25,0.07,0.00,0.07,0.07,0.07,Matches,Eredivisie,2024/25
 375,Oscar Pettersson,se SWE,"FW,MF",Go Ahead Eag,24,2000,7,1,189,2.1,0,0,0,0,0,0,0,0,0.3,0.3,0.6,0.9,4,8,24,0.00,0.00,0.00,0.00,0.00,0.16,0.28,0.45,0.16,0.45,Matches,Eredivisie,2024/25
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,Eredivisie,2024/25
 376,Ivo Pinto,pt POR,DF,Fortuna Sittard,34,1990,31,29,"2,507",27.9,0,3,3,0,0,0,3,0,0.2,0.2,2.5,2.7,69,99,107,0.00,0.11,0.11,0.00,0.11,0.01,0.09,0.10,0.01,0.10,Matches,Eredivisie,2024/25
 377,Miodrag Pivas,rs SRB,"MF,DF",Willem II,19,2005,5,0,34,0.4,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0,1,0,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,Matches,Eredivisie,2024/25
 378,Luca Plogmann,de GER,GK,Go Ahead Eag,24,2000,18,18,"1,620",18.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0,1,0,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,Matches,Eredivisie,2024/25
@@ -415,7 +399,6 @@ Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,
 398,Youri Regeer,nl NED,MF,Twente,20,2003,19,16,"1,342",14.9,0,0,0,0,0,0,2,0,0.7,0.7,1.9,2.6,25,98,76,0.00,0.00,0.00,0.00,0.00,0.05,0.13,0.17,0.05,0.17,Matches,Eredivisie,2024/25
 399,Eliano Reijnders,id IDN,DF,Zwolle,23,2000,21,11,"1,207",13.4,1,0,1,1,0,0,1,0,0.5,0.5,0.8,1.3,22,51,56,0.07,0.00,0.07,0.07,0.07,0.04,0.06,0.10,0.04,0.10,Matches,Eredivisie,2024/25
 400,Boyd Reith,nl NED,DF,Sparta R'dam,25,1999,13,9,870,9.7,0,0,0,0,0,0,2,0,0.2,0.2,0.8,0.9,13,41,64,0.00,0.00,0.00,0.00,0.00,0.02,0.08,0.10,0.02,0.10,Matches,Eredivisie,2024/25
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,Eredivisie,2024/25
 401,Devyne Rensch,nl NED,DF,Ajax,21,2003,14,13,"1,113",12.4,1,0,1,1,0,0,2,0,1.2,1.2,1.7,2.9,16,72,47,0.08,0.00,0.08,0.08,0.08,0.10,0.13,0.23,0.10,0.23,Matches,Eredivisie,2024/25
 402,Marco Rente,de GER,DF,Groningen,27,1997,30,30,"2,590",28.8,2,1,3,2,0,0,4,1,1.4,1.4,1.4,2.8,22,114,50,0.07,0.03,0.10,0.07,0.10,0.05,0.05,0.10,0.05,0.10,Matches,Eredivisie,2024/25
 403,Stije Resink,nl NED,MF,Almere City,21,2003,3,3,238,2.6,0,0,0,0,0,0,1,0,0.1,0.1,0.3,0.3,0,10,6,0.00,0.00,0.00,0.00,0.00,0.02,0.11,0.13,0.02,0.13,Matches,Eredivisie,2024/25
@@ -441,7 +424,6 @@ Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,
 423,Danilo Al Saed,iq IRQ,"MF,FW",Heerenveen,25,1999,6,2,202,2.2,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.1,9,10,29,0.00,0.00,0.00,0.00,0.00,0.01,0.02,0.03,0.01,0.03,Matches,Eredivisie,2024/25
 424,Ismael Saibari,ma MAR,MF,PSV Eindhoven,23,2001,29,20,"1,782",19.8,11,11,22,11,0,0,2,0,11.2,11.2,3.8,15.0,81,111,172,0.56,0.56,1.11,0.56,1.11,0.57,0.19,0.76,0.57,0.76,Matches,Eredivisie,2024/25
 425,Anass Salah-Eddine,nl NED,DF,Twente,22,2002,18,15,"1,280",14.2,2,2,4,2,0,0,1,0,0.7,0.7,1.4,2.1,55,76,80,0.14,0.14,0.28,0.14,0.28,0.05,0.10,0.15,0.05,0.15,Matches,Eredivisie,2024/25
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,Eredivisie,2024/25
 426,Giandro Sambo,cw CUW,"FW,DF",Heracles Almelo,17,2006,2,0,14,0.2,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,1,0,1,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,Matches,Eredivisie,2024/25
 427,Philippe Sandler,nl NED,DF,NEC Nijmegen,27,1997,19,19,"1,406",15.6,0,0,0,0,0,0,1,0,0.2,0.2,0.7,0.9,21,88,11,0.00,0.00,0.00,0.00,0.00,0.01,0.04,0.05,0.01,0.05,Matches,Eredivisie,2024/25
 428,Cisse Sandra,be BEL,"FW,MF",Willem II,20,2003,26,22,"1,873",20.8,4,2,6,4,0,0,1,0,3.0,3.0,1.0,4.0,26,42,93,0.19,0.10,0.29,0.19,0.29,0.15,0.05,0.19,0.15,0.19,Matches,Eredivisie,2024/25
@@ -467,7 +449,6 @@ Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,
 448,Levi Smans,nl NED,"MF,FW",Heerenveen,20,2004,33,25,"2,298",25.5,3,2,5,3,0,0,2,0,4.2,4.2,5.1,9.4,75,105,154,0.12,0.08,0.20,0.12,0.20,0.17,0.20,0.37,0.17,0.37,Matches,Eredivisie,2024/25
 449,Kees Smit,nl NED,"MF,FW",AZ Alkmaar,18,2006,18,9,989,11.0,0,0,0,0,0,0,2,0,1.1,1.1,2.0,3.1,22,61,40,0.00,0.00,0.00,0.00,0.00,0.10,0.18,0.28,0.10,0.28,Matches,Eredivisie,2024/25
 450,Milan Smit,nl NED,"FW,MF",Go Ahead Eag,21,2003,22,9,837,9.3,3,3,6,3,0,0,0,0,2.8,2.8,1.0,3.8,18,17,37,0.32,0.32,0.65,0.32,0.65,0.30,0.10,0.40,0.30,0.40,Matches,Eredivisie,2024/25
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,Eredivisie,2024/25
 451,Kamal Sowah,gh GHA,"MF,FW",NAC Breda,24,2000,12,10,858,9.5,0,0,0,0,0,0,4,0,1.8,1.8,1.8,3.6,9,37,50,0.00,0.00,0.00,0.00,0.00,0.19,0.18,0.38,0.19,0.38,Matches,Eredivisie,2024/25
 452,Mark Spenkelink,nl NED,GK,RKC Waalwijk,27,1997,4,4,360,4.0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0,0,0,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,Matches,Eredivisie,2024/25
 453,Tommy St. Jago,nl NED,DF,Willem II,24,2000,33,33,"2,925",32.5,0,0,0,0,0,0,3,0,0.6,0.6,0.5,1.1,27,104,26,0.00,0.00,0.00,0.00,0.00,0.02,0.01,0.03,0.02,0.03,Matches,Eredivisie,2024/25
@@ -493,7 +474,6 @@ Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,
 473,Quinten Timber,nl NED,MF,Feyenoord,23,2001,18,16,"1,391",15.5,6,0,6,4,2,2,5,0,3.3,1.8,1.6,3.4,24,68,58,0.39,0.00,0.39,0.26,0.26,0.21,0.10,0.32,0.11,0.22,Matches,Eredivisie,2024/25
 474,Mickaël Tirpan,be BEL,DF,Willem II,30,1993,24,22,"1,946",21.6,1,1,2,1,0,0,4,0,0.6,0.6,1.5,2.2,51,83,76,0.05,0.05,0.09,0.05,0.09,0.03,0.07,0.10,0.03,0.10,Matches,Eredivisie,2024/25
 475,Jens Toornstra,nl NED,MF,Utrecht,35,1989,31,16,"1,333",14.8,1,4,5,1,0,0,0,0,2.4,2.4,3.0,5.3,21,74,71,0.07,0.27,0.34,0.07,0.34,0.16,0.20,0.36,0.16,0.36,Matches,Eredivisie,2024/25
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,Eredivisie,2024/25
 476,Bertrand Traoré,bf BFA,FW,Ajax,28,1995,32,20,"1,717",19.1,6,5,11,6,0,0,1,0,8.2,8.2,4.6,12.8,103,116,235,0.31,0.26,0.58,0.31,0.58,0.43,0.24,0.67,0.43,0.67,Matches,Eredivisie,2024/25
 477,Gernot Trauner,at AUT,DF,Feyenoord,32,1992,19,16,"1,388",15.4,0,0,0,0,0,0,5,0,1.1,1.1,0.3,1.4,18,107,2,0.00,0.00,0.00,0.00,0.00,0.07,0.02,0.09,0.07,0.09,Matches,Eredivisie,2024/25
 478,Jacob Trenskow,dk DEN,"FW,MF",Heerenveen,23,2000,25,20,"1,742",19.4,6,3,9,6,0,0,0,0,4.0,4.0,2.9,6.9,62,61,160,0.31,0.15,0.46,0.31,0.46,0.21,0.15,0.36,0.21,0.36,Matches,Eredivisie,2024/25
@@ -519,7 +499,6 @@ Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,
 498,Apostolos Vellios,gr GRE,FW,Zwolle,32,1992,1,0,9,0.1,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0,0,1,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,Matches,Eredivisie,2024/25
 499,Dylan Vente,nl NED,FW,Zwolle,25,1999,30,29,"2,518",28.0,13,0,13,10,3,3,3,0,8.8,6.5,1.6,8.1,37,41,130,0.46,0.00,0.46,0.36,0.36,0.32,0.06,0.37,0.23,0.29,Matches,Eredivisie,2024/25
 500,Calvin Verdonk,id IDN,DF,NEC Nijmegen,27,1997,33,31,"2,853",31.7,1,1,2,1,0,0,9,0,1.1,1.1,3.2,4.3,54,202,84,0.03,0.03,0.06,0.03,0.06,0.03,0.10,0.13,0.03,0.13,Matches,Eredivisie,2024/25
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,Eredivisie,2024/25
 501,Valentino Vermeulen,nl NED,DF,Willem II,23,2001,3,0,24,0.3,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0,1,0,0,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,Matches,Eredivisie,2024/25
 502,Arno Verschueren,be BEL,MF,Sparta R'dam,27,1997,20,20,"1,658",18.4,1,2,3,1,0,0,3,0,3.4,3.4,2.3,5.6,36,52,103,0.05,0.11,0.16,0.05,0.16,0.18,0.12,0.31,0.18,0.31,Matches,Eredivisie,2024/25
 503,Arno Verschueren,be BEL,"MF,FW",Twente,27,1997,14,1,358,4.0,0,0,0,0,0,0,3,0,0.9,0.9,0.2,1.1,6,16,23,0.00,0.00,0.00,0.00,0.00,0.23,0.05,0.27,0.23,0.27,Matches,Eredivisie,2024/25
@@ -545,7 +524,6 @@ Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,
 523,Vasilios Zagaritis,gr GRE,DF,Almere City,23,2001,33,33,"2,957",32.9,0,2,2,0,0,0,4,0,0.8,0.8,3.2,4.0,92,132,142,0.00,0.06,0.06,0.00,0.06,0.02,0.10,0.12,0.02,0.12,Matches,Eredivisie,2024/25
 524,Jan Žambůrek,cz CZE,MF,Heracles Almelo,23,2001,20,10,935,10.4,0,1,1,0,0,0,3,0,0.1,0.1,0.9,1.0,8,24,13,0.00,0.10,0.10,0.00,0.10,0.01,0.09,0.10,0.01,0.10,Matches,Eredivisie,2024/25
 525,Oskar Zawada,pl POL,FW,RKC Waalwijk,28,1996,26,24,"1,945",21.6,9,0,9,9,0,0,2,1,13.7,13.7,1.9,15.6,8,26,71,0.42,0.00,0.42,0.42,0.42,0.63,0.09,0.72,0.63,0.72,Matches,Eredivisie,2024/25
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG,PrgC,PrgP,PrgR,Gls,Ast,G+A,G-PK,G+A-PK,xG,xAG,xG+xAG,npxG,npxG+xAG,Matches,Eredivisie,2024/25
 526,Gjivai Zechiël,nl NED,MF,Sparta R'dam,20,2004,13,12,"1,025",11.4,2,1,3,2,0,0,3,0,1.7,1.7,1.1,2.7,21,50,20,0.18,0.09,0.26,0.18,0.26,0.15,0.09,0.24,0.15,0.24,Matches,Eredivisie,2024/25
 527,Gjivai Zechiël,nl NED,MF,Feyenoord,20,2004,9,2,258,2.9,0,2,2,0,0,0,1,0,0.4,0.4,0.8,1.2,2,15,15,0.00,0.70,0.70,0.00,0.70,0.14,0.28,0.42,0.14,0.42,Matches,Eredivisie,2024/25
 528,Lequincio Zeefuik,nl NED,"FW,DF",AZ Alkmaar,19,2004,3,0,32,0.4,0,0,0,0,0,0,1,0,0.1,0.1,0.0,0.1,0,1,2,0.00,0.00,0.00,0.00,0.00,0.35,0.00,0.35,0.35,0.35,Matches,Eredivisie,2024/25
