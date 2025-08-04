@@ -3,7 +3,7 @@ import pandas as pd
 from bs4 import BeautifulSoup, Comment
 import warnings
 
-def scrape_player_stats(name, url, table_id, season=None):
+def scrape_player_stats(name, url, table_id):
     warnings.filterwarnings("ignore")
     headers = {'User-Agent': 'Mozilla/5.0'}
 
@@ -36,7 +36,6 @@ def scrape_player_stats(name, url, table_id, season=None):
         return None
 
     df['League'] = name
-    df['Season'] = season
 
     return df
 
