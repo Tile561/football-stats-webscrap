@@ -43,22 +43,4 @@ def scrape_player_stats(name, url, table_id):
     return df
 
 
-def looping_through_leagues(leagueinfo, years):
-    leagues = []
-    for year in years:
-        for league in leagueinfo:
-            leagues.append({
-                "name": f"{league['name']} {year}",
-                "url": league["url"].format(year=year),
-            })
 
-    league_dfs = {}
-    combined_list = []
-    for league in leagues:
-        df = scrape_player_stats(league["name"], league["url"], table_id='stats_keeper')
-        if df is not None:
-            league_dfs[league["name"]] = df
-            combined_list.append(df)
-        else:
-            print(f"Failed for {league['name']} at {league['url']}")
-        time.sleep(5)  
