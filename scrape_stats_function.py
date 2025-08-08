@@ -3,7 +3,6 @@ import pandas as pd
 from bs4 import BeautifulSoup, Comment
 import warnings
 import time
-pd.set_option('display.max_columns', None)
 
 
 def scrape_player_stats(name, url, table_id):
@@ -44,14 +43,13 @@ def scrape_player_stats(name, url, table_id):
 
 
 
-
-def scrape_league_data(league_name, url, table_id=None):
+def scrape_match_data(league_name, url, table_id=None):
     warnings.filterwarnings("ignore")
 
     headers = {'User-Agent': 'Mozilla/5.0'}
     response = requests.get(url, headers=headers, verify= False)
     soup = BeautifulSoup(response.content, 'html.parser')
-    print(response.status_code,f"Scraping {league_name}...")
+    print(response.status_code, url)
 
     table = soup.find("table", id=table_id) if table_id else soup.find("table")
     if not table:
@@ -61,6 +59,7 @@ def scrape_league_data(league_name, url, table_id=None):
     df = pd.read_html(str(table))[0]
     df['League'] = league_name
     return df
+
 
 
 def combine_data(years,leagueinfo, table_id):
@@ -74,18 +73,22 @@ def combine_data(years,leagueinfo, table_id):
 
     league_dfs = {}
     combined_list = []
-    for league in leagues:
-        df = scrape_player_stats(league["name"], league["url"], table_id=table_id)
-        if df is not None:
-            league_dfs[league["name"]] = df
-            combined_list.append(df)
-        else:
-            print(f"Failed for {league['name']} at {league['url']}")
-        time.sleep(5) 
+    try:
+        for league in leagues:
+            df = scrape_player_stats(league["name"], league["url"], table_id=table_id)
+            if df is not None:
+                league_dfs[league["name"]] = df
+                combined_list.append(df)
+            else:
+                print(f"Failed for {league['name']} at {league['url']}")
+            time.sleep(5)
+    except KeyboardInterrupt:
+        print("Scraping interrupted")
     return combined_list
 
 
-def combine_league_data(years,leagueinfo,table_id):
+
+def combine_match_data(years,leagueinfo,table_id):
     leagues = []
     for year in years:
         for league in leagueinfo:
@@ -96,12 +99,15 @@ def combine_league_data(years,leagueinfo,table_id):
 
     league_dfs = {}
     combined_list = []
-    for league in leagues:
-        df = scrape_league_data(league["name"], league["url"], table_id=table_id)
-        if df is not None:
-            league_dfs[league["name"]] = df
-            combined_list.append(df)
-        else:
-            print(f"Failed for {league['name']} at {league['url']}")
-        time.sleep(5) 
+    try:
+        for league in leagues:
+            df = scrape_match_data(league["name"], league["url"], table_id=table_id)
+            if df is not None:
+                league_dfs[league["name"]] = df
+                combined_list.append(df)
+            else:
+                print(f"Failed for {league['name']} at {league['url']}")
+            time.sleep(5) 
+    except KeyboardInterrupt:
+        print("Scraping interrupted")
     return combined_list
