@@ -42,7 +42,6 @@ def scrape_player_stats(name, url, table_id):
     return df
 
 
-
 def scrape_match_data(league_name, url, table_id=None):
     warnings.filterwarnings("ignore")
 
@@ -59,7 +58,6 @@ def scrape_match_data(league_name, url, table_id=None):
     df = pd.read_html(str(table))[0]
     df['League'] = league_name
     return df
-
 
 
 def combine_data(years,leagueinfo, table_id):
@@ -85,7 +83,6 @@ def combine_data(years,leagueinfo, table_id):
     except KeyboardInterrupt:
         print("Scraping interrupted")
     return combined_list
-
 
 
 def combine_match_data(years,leagueinfo,table_id):
