@@ -83,14 +83,14 @@ def build_leagueinfo(leagues, category):
         })
     return leagueinfo
 
-'''''
+
 dataframes = {}
 for category, tables in categories.items():
     leagueinfo = build_leagueinfo(leagues, category)
     for name, table_id in tables:
         dfs = combine_data(years, leagueinfo, table_id=table_id)  
         dataframes[name] = dfs  
-'''
+
 
 dataframes_match = {}
 for category, tables in categories_match.items():
