@@ -22,3 +22,22 @@ if not table:
 player_links = [BASE + a["href"] for a in table.select("td[data-stat='player'] a")]
 
 print(player_links[:5])
+
+def make_matchlog_links(player_urls, years, league_id=None):
+    links = []
+    for url in player_urls:
+        parts = url.strip("/").split("/")
+        player_id = parts[-2]      # "dea698d9"
+        player_slug = parts[-1]    # "Erling-Haaland"
+        
+        for year in years:
+            if league_id:  # league-specific match logs
+                matchlog_url = f"{BASE}/en/players/{player_id}/matchlogs/{year}/{league_id}/{player_slug}-Match-Logs"
+            else:  # general match logs
+                matchlog_url = f"{BASE}/en/players/{player_id}/matchlogs/{year}/{player_slug}-Match-Logs"
+            links.append(matchlog_url)
+    return links
+
+general_matchlog_links = make_matchlog_links(player_links, years)
+
+print(general_matchlog_links)
