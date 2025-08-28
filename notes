@@ -1,0 +1,24 @@
+Notes--- for scrapping indvidual match player match log data
+url = "https://fbref.com/en/comps/9/2023-2024/stats/2023-2024-Premier-League-Stats"
+headers = {"User-Agent": "Mozilla/5.0"}
+
+res = requests.get(url, headers=headers, verify=False)
+soup = BeautifulSoup(res.text, "html.parser")
+
+# The player stats table
+table_id = "stats_standard"
+table = soup.find("table", id = table_id)
+
+if not table:
+    for comment in soup.find_all(string = lambda text: isinstance(text, Comment)):
+        if table_id in comment: 
+            print(f"found {table_id}")
+            comment_soup = BeautifulSoup(comment, 'html.parser')
+            table = comment_soup.find("table", id=table_id)
+        if table: 
+            break
+
+# Grab all <a> tags inside the player column
+player_links = [BASE + a["href"] for a in table.select("td[data-stat='player'] a")]
+
+print(player_links[:5])
