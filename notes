@@ -1,4 +1,6 @@
 Notes--- for scrapping indvidual match player match log data
+BASE = "https://fbref.com"
+
 url = "https://fbref.com/en/comps/9/2023-2024/stats/2023-2024-Premier-League-Stats"
 headers = {"User-Agent": "Mozilla/5.0"}
 
