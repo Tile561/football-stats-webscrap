@@ -1,0 +1,118 @@
+More notes: 
+import requests
+from bs4 import BeautifulSoup, Comment
+from urllib.parse import urlparse
+import time
+years = ["2024-2025","2023-2024","2022-2023","2021-2022","2020-2021","2019-2020","2018-2019","2017-2018","2016-2017","2015-2016","2014-2015","2013-2014","2012-2013","2011-2012","2010-2011"]
+BASE = "https://fbref.com"
+
+# Example: Premier League 2023-2024 season
+url = "https://fbref.com/en/comps/9/2023-2024/stats/2023-2024-Premier-League-Stats"
+standard_url = [
+    {
+        "name": "Bundesliga",
+        "url": "https://fbref.com/en/comps/20/{year}/stats/{year}-Bundesliga-Stats"
+    },
+    {
+        "name": "Premier League",
+        "url": "https://fbref.com/en/comps/9/{year}/stats/{year}-Premier-League-Stats"
+    },
+    {
+        "name": "La Liga",
+        "url": "https://fbref.com/en/comps/12/{year}/stats/{year}-La-Liga-Stats"
+    },
+    {
+        "name": "Serie A",
+        "url": "https://fbref.com/en/comps/11/{year}/stats/{year}-Serie-A-Stats"
+    },
+    {
+        "name": "Ligue 1",
+        "url": "https://fbref.com/en/comps/13/{year}/stats/{year}-Ligue-1-Stats"
+    },
+    {
+        "name": "Eredivisie",
+        "url": "https://fbref.com/en/comps/23/{year}/stats/{year}-Eredivisie-Stats"
+    },
+    {
+        "name": "Primeira Liga",
+        "url": "https://fbref.com/en/comps/32/{year}/stats/{year}-Primeira-Liga-Stats"
+    },
+    {
+        "name": "Championship",
+        "url": "https://fbref.com/en/comps/10/{year}/stats/{year}-EFL-Championship-Stats"
+    },
+    {
+        "name": "Scottish Premiership",
+        "url": "https://fbref.com/en/comps/40/{year}/stats/{year}-Scottish-Premiership-Stats"
+    }
+ 
+]
+
+def create_links(years, league):
+    links = []
+    for year in years:
+        url = league["url"].format(year=year)
+        links.append(url)
+    return links
+
+links =create_links(years, standard_url[1])
+print(links)
+headers = {"User-Agent": "Mozilla/5.0"}
+
+for link in links:
+    res = requests.get(link, headers=headers, verify=False)
+    soup = BeautifulSoup(res.text, "html.parser")
+
+    # The player stats table
+
+    table_id = "stats_standard"
+    table = soup.find("table", id = table_id)
+
+    if not table:
+        for comment in soup.find_all(string = lambda text: isinstance(text, Comment)):
+            if table_id in comment: 
+                print(f"found {table_id} for {link}")
+                comment_soup = BeautifulSoup(comment, 'html.parser')
+                table = comment_soup.find("table", id=table_id)
+            if table: 
+                break
+                
+
+
+
+
+        # Grab all <a> tags inside the player column
+        player_links = [BASE + a["href"] for a in table.select("td[data-stat='player'] a")]
+        time.sleep(5)
+        
+
+print(player_links[:5])
+
+
+def make_matchlog_links(player_urls, years):
+    links = []
+    for url in player_urls:
+        parts = url.strip("/").split("/")
+        player_id = parts[-2]      # "dea698d9"
+        player_slug = parts[-1]    # "Erling-Haaland"
+        
+        for year in years:
+            '''
+            if league_id:  # league-specific match logs
+                matchlog_url = f"{BASE}/en/players/{player_id}/matchlogs/{year}/{league_id}/{player_slug}-Match-Logs"
+            else:  # general match logs
+
+            '''
+            matchlog_url = f"https://fbref.com/en/players/{player_id}/matchlogs/{year}/{player_slug}-Match-Logs"
+            links.append(matchlog_url)
+    return links
+
+general_matchlog_links = []
+general_matchlog_links = make_matchlog_links(player_links, years)
+
+#print(general_matchlog_links)
+
+player_gca = []
+#player_gca = combine_data(years, general_matchlog_links, table_id='stats_gca')
+
+
