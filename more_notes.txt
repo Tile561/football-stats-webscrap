@@ -52,6 +52,7 @@ def create_links(years, league):
     links = []
     for year in years:
         url = league["url"].format(year=year)
+        name = league["name"]
         links.append(url)
     return links
 
@@ -64,26 +65,28 @@ for link in links:
     soup = BeautifulSoup(res.text, "html.parser")
 
     # The player stats table
+    try: 
+        table_id = "stats_standard"
+        table = soup.find("table", id = table_id)
 
-    table_id = "stats_standard"
-    table = soup.find("table", id = table_id)
-
-    if not table:
-        for comment in soup.find_all(string = lambda text: isinstance(text, Comment)):
-            if table_id in comment: 
-                print(f"found {table_id} for {link}")
-                comment_soup = BeautifulSoup(comment, 'html.parser')
-                table = comment_soup.find("table", id=table_id)
-            if table: 
-                break
-                
-
-
+        if not table:
+            for comment in soup.find_all(string = lambda text: isinstance(text, Comment)):
+                if table_id in comment: 
+                    print(f"found {table_id} for {link}")
+                    comment_soup = BeautifulSoup(comment, 'html.parser')
+                    table = comment_soup.find("table", id=table_id)
+                if table: 
+                    break
+                    
 
 
-        # Grab all <a> tags inside the player column
-        player_links = [BASE + a["href"] for a in table.select("td[data-stat='player'] a")]
-        time.sleep(5)
+
+
+            # Grab all <a> tags inside the player column
+            player_links = [BASE + a["href"] for a in table.select("td[data-stat='player'] a")]
+    except KeyboardInterrupt:
+        print("Process interrupted by user.")
+    time.sleep(5)
         
 
 print(player_links[:5])
@@ -96,13 +99,7 @@ def make_matchlog_links(player_urls, years):
         player_id = parts[-2]      # "dea698d9"
         player_slug = parts[-1]    # "Erling-Haaland"
         
-        for year in years:
-            '''
-            if league_id:  # league-specific match logs
-                matchlog_url = f"{BASE}/en/players/{player_id}/matchlogs/{year}/{league_id}/{player_slug}-Match-Logs"
-            else:  # general match logs
-
-            '''
+        for year in years:   
             matchlog_url = f"https://fbref.com/en/players/{player_id}/matchlogs/{year}/{player_slug}-Match-Logs"
             links.append(matchlog_url)
     return links
@@ -113,6 +110,11 @@ general_matchlog_links = make_matchlog_links(player_links, years)
 #print(general_matchlog_links)
 
 player_gca = []
-#player_gca = combine_data(years, general_matchlog_links, table_id='stats_gca')
+player_gca = combine_data(years, general_matchlog_links, table_id='stats_gca')
+
+
+
+
+
 
 
