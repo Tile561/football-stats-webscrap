@@ -48,18 +48,18 @@ def main():
             df = dfs
         os.makedirs("data/raw", exist_ok=True)
         df.to_csv(f"data/raw/raw_{name}.csv", index=False)
-        
+
 
     player_links = get_player_links(years, standard_url)
 
-    player_links = player_links[:2]
-
     all_match_logs = get_match_logs(years, player_links, stats)
 
-    # Save each category separately
-    os.makedirs("data/raw", exist_ok=True)
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    data_path = os.path.join(project_root, "data", "raw")
+    os.makedirs(data_path, exist_ok=True)
+
     for stat, df in all_match_logs.items():
-        output_path = os.path.join("data", "raw", f"player_match_logs_{stat}.csv")
+        output_path = os.path.join(data_path, f"player_match_logs_{stat}.csv")
         df.to_csv(output_path, index=False)
         print(f"Saved {stat} match logs to {output_path}")
 
