@@ -1,0 +1,36 @@
+
+stats = ["summary","defense","passing","gca","possession","passing_types","keeper"]
+
+
+def make_matchlog_links(player_urls, years, stats):
+    links = {stat: [] for stat in stats}
+    for url in player_urls:
+        parts = url.strip("/").split("/")
+        player_id = parts[-2]      # "dea698d9"
+        player_slug = parts[-1]    # "Erling-Haaland"
+        
+        for year in years:   
+            for stat in stats:
+                matchlog_url = f"https://fbref.com/en/players/{player_id}/matchlogs/{year}/{stat}/{player_slug}-Match-Logs"
+                links[stat].append({
+                    "name": f"{player_slug} - {stat}",
+                    "url": matchlog_url})
+    return links
+
+general_matchlog_links = []
+general_matchlog_links = make_matchlog_links(player_links, years,stats)
+
+print(general_matchlog_links)
+
+match_logs = []
+
+
+import pandas as pd 
+pd.set_option('display.max_columns', None)
+
+
+match_logs = []
+match_logs = combine_data(years, general_matchlog_links, table_id="matchlogs_all")
+
+match_logs_df = pd.concat(match_logs, ignore_index=True)
+match_logs_df.head()
