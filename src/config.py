@@ -52,10 +52,10 @@ standard_url = [
         "name": "Scottish Premiership",
         "url": "https://fbref.com/en/comps/40/{year}/stats/{year}-Scottish-Premiership-Stats"
     }
-
- 
 ]
+'''
 
+'''
 # stat categories
 categories = {
     "gca": [
@@ -93,12 +93,12 @@ categories = {
         ("team_possession_df", "stats_squads_possession_for"),
         ("team_possession_against_df", "stats_squads_possession_against"),
     ],
-    "standard": [
+    "stats": [
         ("stats_player_standard_df", "stats_standard"),
         ("stats_squad_standard_df", "stats_squads_standard_for"),
         ("stats_squad_standard_against_df", "stats_squads_standard_against"),
     ],
-    "keeper": [
+    "keepers": [
         ("stats_keeper_df", "stats_keeper"),
         ("stats_squad_keeper_df", "stats_squads_keeper_for"),
         ("stats_squad_keeper_against_df", "stats_squads_keeper_against"),
@@ -173,3 +173,6 @@ exclude_tables_against = {
 
 team_tables = exclude_team_tables.union(exclude_tables_against)
 against_tables = {table for table in team_tables if "against" in table}
+
+
+stats = ["summary","defense","passing","gca","possession","passing_types","keeper"]

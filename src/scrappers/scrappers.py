@@ -88,12 +88,31 @@ def get_player_links(years, leagues):
             links_found = [BASE + a["href"] for a in table.select("td[data-stat='player'] a")]
             player_links.extend(links_found)
 
-        time.sleep(5)  # be polite to server
+        time.sleep(5)  
     return player_links
 
-def get_match_logs(years, player_links):
-    matchlog_links = make_matchlog_links(player_links, years)
-    return combine_data(years, matchlog_links, table_id="matchlogs_all")
+def get_match_logs(years, player_links, stats):
+    matchlog_links = make_matchlog_links(player_links, years, stats)
+    
+    all_dfs = {}
+    for stat, links in matchlog_links.items():
+        dfs = []
+        for link in links:
+            try:
+                df_list = combine_data(years, [link], table_id="matchlogs_all")  # may return a list
+                if df_list:  
+                    # flatten if df_list is already a list of DataFrames
+                    if isinstance(df_list, list):
+                        dfs.extend(df_list)
+                    else:
+                        dfs.append(df_list)
+            except Exception as e:
+                print(f"Error retrieving {link['url']}: {e}")
+        if dfs:
+            all_dfs[stat] = pd.concat(dfs, ignore_index=True)
+        else:
+            print(f"No data retrieved for category {stat}")
+    return all_dfs
 
 def combine_data(years,leagueinfo, table_id):
     leagues = []

@@ -1,5 +1,5 @@
 import pandas as pd
-from config import years, leagues, categories, categories_match, standard_url
+from config import years, leagues, categories, categories_match, standard_url, stats
 from pipeline.url_builder import build_leagueinfo
 from scrappers.scrappers import combine_data, combine_match_data
 from scrappers.scrappers import get_player_links, get_match_logs
@@ -25,40 +25,44 @@ def main():
 
     # Save stats categories
     for name, dfs in dataframes.items():
-        if isinstance(dfs, list):  # combine list of DataFrames
-            df = pd.concat(dfs, ignore_index=True)
+        if isinstance(dfs, list):  
+            if dfs:
+                df = pd.concat(dfs, ignore_index=True)
+            else:
+                print("No data found")
+                continue
         else:
             df = dfs
         os.makedirs("data/raw", exist_ok=True)
-        df.to_csv(f"data/raw/{name}_test.csv", index=False)
+        df.to_csv(f"data/raw/raw_{name}.csv", index=False)
 
     # Save match-related categories
     for name, dfs in dataframes_match.items():
         if isinstance(dfs, list):
-            df = pd.concat(dfs, ignore_index=True)
+            if dfs:
+                df = pd.concat(dfs, ignore_index=True)
+            else:
+                print("No data found")
+                continue
         else:
             df = dfs
         os.makedirs("data/raw", exist_ok=True)
-        df.to_csv(f"data/raw/{name}_test.csv", index=False)
+        df.to_csv(f"data/raw/raw_{name}.csv", index=False)
+        
 
-
-    # 1. Get player links
     player_links = get_player_links(years, standard_url)
 
-    # Limit to first 5 players for testing
-    #player_links = player_links[:5]
+    player_links = player_links[:2]
 
-    # 2. Get match logs only for those 5 players
-    match_logs = get_match_logs(years, player_links)
-    match_logs_df = pd.concat(match_logs, ignore_index=True)
-    #print(match_logs_df.head())
+    all_match_logs = get_match_logs(years, player_links, stats)
 
-    # 3. Save to CSV inside data folder
+    # Save each category separately
     os.makedirs("data/raw", exist_ok=True)
-    output_path = os.path.join("data", "raw", "player_match_logs.csv") 
+    for stat, df in all_match_logs.items():
+        output_path = os.path.join("data", "raw", f"player_match_logs_{stat}.csv")
+        df.to_csv(output_path, index=False)
+        print(f"Saved {stat} match logs to {output_path}")
 
-    match_logs_df.to_csv(output_path, index=False)
-    print(f"Match logs saved to {output_path}")
 
 
 if __name__ == "__main__":

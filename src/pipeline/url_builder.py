@@ -1,3 +1,5 @@
+from config import stats
+
 
 def build_leagueinfo(leagues, category):
     leagueinfo = []
@@ -18,15 +20,16 @@ def create_links(years, leagues):
     return links
 
 def make_matchlog_links(player_urls, years):
-    links = []
+    links = {stat: [] for stat in stats}
     for url in player_urls:
         parts = url.strip("/").split("/")
         player_id = parts[-2]
         player_slug = parts[-1]
         for year in years:
-            matchlog_url = f"https://fbref.com/en/players/{player_id}/matchlogs/{year}/{player_slug}-Match-Logs"
-            links.append({
-                "name": f"{player_slug}",
-                "url": matchlog_url
-            })
+            for stat in stats:
+                matchlog_url = f"https://fbref.com/en/players/{player_id}/matchlogs/{year}/{stat}/{player_slug}-Match-Logs"
+                links.append({
+                    "name": f"{player_slug} - {stat}",
+                    "url": matchlog_url
+                })
     return links
