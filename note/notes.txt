@@ -1,0 +1,107 @@
+Notes--- for scrapping indvidual match player match log data
+BASE = "https://fbref.com"
+
+url = "https://fbref.com/en/comps/9/2023-2024/stats/2023-2024-Premier-League-Stats"
+headers = {"User-Agent": "Mozilla/5.0"}
+
+res = requests.get(url, headers=headers, verify=False)
+soup = BeautifulSoup(res.text, "html.parser")
+
+# The player stats table
+table_id = "stats_standard"
+table = soup.find("table", id = table_id)
+
+if not table:
+    for comment in soup.find_all(string = lambda text: isinstance(text, Comment)):
+        if table_id in comment: 
+            print(f"found {table_id}")
+            comment_soup = BeautifulSoup(comment, 'html.parser')
+            table = comment_soup.find("table", id=table_id)
+        if table: 
+            break
+
+# Grab all <a> tags inside the player column
+player_links = [BASE + a["href"] for a in table.select("td[data-stat='player'] a")]
+
+print(player_links[:5])
+
+def make_matchlog_links(player_urls, years, league_id=None):
+    links = []
+    for url in player_urls:
+        parts = url.strip("/").split("/")
+        player_id = parts[-2]      # "dea698d9"
+        player_slug = parts[-1]    # "Erling-Haaland"
+        
+        for year in years:
+            if league_id:  # league-specific match logs
+                matchlog_url = f"{BASE}/en/players/{player_id}/matchlogs/{year}/{league_id}/{player_slug}-Match-Logs"
+            else:  # general match logs
+                matchlog_url = f"{BASE}/en/players/{player_id}/matchlogs/{year}/{player_slug}-Match-Logs"
+            links.append(matchlog_url)
+    return links
+
+general_matchlog_links = make_matchlog_links(player_links, years)
+
+print(general_matchlog_links)
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Categorize the matchlog data into these tables:
+matchlogs_standard
+matchlogs_shooting
+matchlogs_passing
+matchlogs_possession
+matchlogs_gca
+matchlogs_defense
+matchlogs_keeper
+matchlogs_keeper_adv
+matchlogs_misc
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+categories = {
+    "gca": [
+        ("player_gca_df", "stats_gca"),
+        ("team_gca_df", "stats_squads_gca_for"),
+        ("team_gca_against_df", "stats_squads_gca_against"),
+    ],
+    "keepersadv": [
+        ("player_keepersadv_df", "stats_keeper_adv"),
+        ("team_keepersadv_df", "stats_squads_keeper_adv_for"),
+        ("team_keepersadv_against_df", "stats_squads_keeper_adv_against"),
+    ],
+    "shooting": [
+        ("player_shooting_df", "stats_shooting"),
+        ("team_shooting_df", "stats_squads_shooting_for"),
+        ("team_shooting_against_df", "stats_squads_shooting_against"),
+    ],
+    "passing": [
+        ("player_passing_df", "stats_passing"),
+        ("team_passing_df", "stats_squads_passing_for"),
+        ("team_passing_against_df", "stats_squads_passing_against"),
+    ],
+    "passing_types": [
+        ("player_passing_type_df", "stats_passing_types"),
+        ("team_passing_type_df", "stats_squads_passing_types_for"),
+        ("team_passing_type_against_df", "stats_squads_passing_types_against"),
+    ],
+    "defense": [
+        ("player_defense_df", "stats_defense"),
+        ("team_defense_df", "stats_squads_defense_for"),
+        ("team_defense_against_df", "stats_squads_defense_against"),
+    ],
+    "possession": [
+        ("player_possession_df", "stats_possession"),
+        ("team_possession_df", "stats_squads_possession_for"),
+        ("team_possession_against_df", "stats_squads_possession_against"),
+    ],
+    "standard": [
+        ("stats_player_standard_df", "stats_standard"),
+        ("stats_squad_standard_df", "stats_squads_standard_for"),
+        ("stats_squad_standard_against_df", "stats_squads_standard_against"),
+    ],
+    "keeper": [
+        ("stats_keeper_df", "stats_keeper"),
+        ("stats_squad_keeper_df", "stats_squads_keeper_for"),
+        ("stats_squad_keeper_against_df", "stats_squads_keeper_against"),
+    ],
+}
+
+

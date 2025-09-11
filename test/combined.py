@@ -61,8 +61,12 @@ categories = {
     ],
     "keeper": [
         ("stats_keeper_df", "stats_keeper"),
+        ("stats_squad_keeper_df", "stats_squads_keeper_for"),
+        ("stats_squad_keeper_against_df", "stats_squads_keeper_against"),
     ],
 }
+
+
 
 
 categories_match = {

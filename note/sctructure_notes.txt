@@ -1,0 +1,56 @@
+def collect_stats(years, leagues, categories):
+    dataframes = {}
+    for category, tables in categories.items():
+        leagueinfo = build_leagueinfo(leagues, category)
+        for name, table_id in tables:
+            dfs = combine_data(years, leagueinfo, table_id=table_id)
+            dataframes[name] = dfs
+    return dataframes
+
+
+def collect_match_stats(years, leagues, categories_match):
+    dataframes_match = {}
+    for category, tables in categories_match.items():
+        leagueinfo = build_leagueinfo(leagues, category)
+        for name, table_id in tables:
+            dfs = combine_match_data(years, leagueinfo, table_id=table_id)
+            dataframes_match[name] = dfs
+    return dataframes_match
+
+
+def save_dataframes(dataframes, output_dir, prefix="raw"):
+    os.makedirs(output_dir, exist_ok=True)
+    for name, dfs in dataframes.items():
+        if isinstance(dfs, list):
+            if dfs:
+                df = pd.concat(dfs, ignore_index=True)
+            else:
+                print(f"No data found for {name}")
+                continue
+        else:
+            df = dfs
+        df.to_csv(os.path.join(output_dir, f"{prefix}_{name}.csv"), index=False)
+
+
+def collect_player_match_logs(years, standard_url, stats, output_dir):
+    player_links = get_player_links(years, standard_url)
+    all_match_logs = get_match_logs(years, player_links, stats)
+
+    os.makedirs(output_dir, exist_ok=True)
+    for stat, df in all_match_logs.items():
+        output_path = os.path.join(output_dir, f"player_match_logs_{stat}.csv")
+        df.to_csv(output_path, index=False)
+        print(f"Saved {stat} match logs to {output_path}")
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+def main():
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    data_path = os.path.join(project_root, "data", "raw")
+
+    stats_dfs = collect_stats(years, leagues, categories)
+    save_dataframes(stats_dfs, data_path, prefix="raw")
+
+    match_dfs = collect_match_stats(years, leagues, categories_match)
+    save_dataframes(match_dfs, data_path, prefix="raw")
+
+    collect_player_match_logs(years, standard_url, stats, data_path)
+
