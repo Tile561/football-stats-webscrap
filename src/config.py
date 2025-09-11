@@ -13,8 +13,12 @@ leagues = [
     {"name": "Primeira Liga", "id": 32},
     {"name": "Championship", "id": 10},
     {"name": "Scottish Premiership", "id": 40},
+    {"name": "Belgian Pro League", "id": 37},     # Belgium
+    {"name": "Danish Superliga", "id": 50},       # Denmark
+    {"name": "Swiss Super League", "id": 57},     # Switzerland
+    {"name": "Austrian Bundesliga", "id": 56},    # Austria
+    {"name": "Turkish Süper Lig", "id": 26},      # Turkey
 ]
-
 standard_url = [
     {
         "name": "Bundesliga",
@@ -51,8 +55,29 @@ standard_url = [
     {
         "name": "Scottish Premiership",
         "url": "https://fbref.com/en/comps/40/{year}/stats/{year}-Scottish-Premiership-Stats"
+    },
+    {
+        "name": "Belgian Pro League",
+        "url": "https://fbref.com/en/comps/37/{year}/stats/{year}-Belgian-Pro-League-Stats"
+    },
+    {
+        "name": "Danish Superliga",
+        "url": "https://fbref.com/en/comps/50/{year}/stats/{year}-Danish-Superliga-Stats"
+    },
+    {
+        "name": "Swiss Super League",
+        "url": "https://fbref.com/en/comps/57/{year}/stats/{year}-Swiss-Super-League-Stats"
+    },
+    {
+        "name": "Austrian Bundesliga",
+        "url": "https://fbref.com/en/comps/56/{year}/stats/{year}-Austrian-Bundesliga-Stats"
+    },
+    {
+        "name": "Turkish Süper Lig",
+        "url": "https://fbref.com/en/comps/26/{year}/stats/{year}-Super-Lig-Stats"
     }
 ]
+
 '''
 
 '''
