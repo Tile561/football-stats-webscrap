@@ -76,10 +76,11 @@ standard_url = [
         "name": "Turkish Süper Lig",
         "url": "https://fbref.com/en/comps/26/{year}/stats/{year}-Super-Lig-Stats"
     }
+
 ]
 
 '''
-
+    
 '''
 # stat categories
 categories = {

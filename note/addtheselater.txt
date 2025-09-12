@@ -1,0 +1,31 @@
+502 https://fbref.com/en/comps/13/2021-2022/possession/2021-2022-Ligue-1-Stats
+Table not found for Ligue 1 2021-2022
+stats_possession
+Failed for Ligue 1 2021-2022 at https://fbref.com/en/comps/13/2021-2022/possession/2021-2022-Ligue-1-Stats
+502 https://fbref.com/en/comps/23/2021-2022/possession/2021-2022-Eredivisie-Stats
+Table not found for Eredivisie 2021-2022
+stats_possession
+Failed for Eredivisie 2021-2022 at https://fbref.com/en/comps/23/2021-2022/possession/2021-2022-Eredivisie-Stats
+200 https://fbref.com/en/comps/32/2021-2022/possession/2021-2022-Primeira-Liga-Stats
+Found stats_possession in comment for Primeira Liga 2021-2022
+504 https://fbref.com/en/comps/10/2021-2022/possession/2021-2022-Championship-Stats
+Table not found for Championship 2021-2022
+stats_possession
+Failed for Championship 2021-2022 at https://fbref.com/en/comps/10/2021-2022/possession/2021-2022-Championship-Stats
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

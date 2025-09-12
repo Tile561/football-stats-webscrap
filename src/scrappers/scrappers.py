@@ -99,7 +99,7 @@ def get_match_logs(years, player_links, stats):
         dfs = []
         for link in links:
             try:
-                df_list = combine_data(years, [link], table_id="matchlogs_all")  # may return a list
+                df_list = combine_data([link["year"]], [link], table_id="matchlogs_all")  # may return a list
                 if df_list:  
                     # flatten if df_list is already a list of DataFrames
                     if isinstance(df_list, list):
