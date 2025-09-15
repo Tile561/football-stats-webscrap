@@ -9,7 +9,8 @@ def main():
 
     player_links = get_player_links(years, standard_url)
 
-    player_links = player_links[:5]
+    #player_links = player_links[:5]
+    #print(player_links)
     all_match_logs = get_match_logs(years, player_links, stats)
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -17,7 +18,7 @@ def main():
     os.makedirs(data_path, exist_ok=True)
 
     for stat, df in all_match_logs.items():
-        output_path = os.path.join(data_path, f"player_match_logs_{stat}.csv")
+        output_path = os.path.join(data_path, f"player_match_logs_{stat}_raw.csv")
         df.to_csv(output_path, index=False)
         print(f"Saved {stat} match logs to {output_path}")
 

@@ -92,27 +92,39 @@ def get_player_links(years, leagues):
     return player_links
 
 def get_match_logs(years, player_links, stats):
-    matchlog_links = make_matchlog_links(player_links, years, stats)
-    
     all_dfs = {}
-    for stat, links in matchlog_links.items():
-        dfs = []
-        for link in links:
-            try:
-                df_list = combine_data([link["year"]], [link], table_id="matchlogs_all")  # may return a list
-                if df_list:  
-                    # flatten if df_list is already a list of DataFrames
-                    if isinstance(df_list, list):
-                        dfs.extend(df_list)
-                    else:
-                        dfs.append(df_list)
-            except Exception as e:
-                print(f"Error retrieving {link['url']}: {e}")
-        if dfs:
-            all_dfs[stat] = pd.concat(dfs, ignore_index=True)
-        else:
-            print(f"No data retrieved for category {stat}")
-    return all_dfs
+
+    # Loop over years one by one (newest to oldest, if list is ordered that way)
+    for year in years:
+        print(f"Scraping year: {year}")
+
+        # Build match log links only for this year
+        matchlog_links = make_matchlog_links(player_links, [year], stats)
+
+        for stat, links in matchlog_links.items():
+            dfs = []
+            for link in links:
+                try:
+                    df_list = combine_data([year], [link], table_id="matchlogs_all")
+                    if df_list:
+                        if isinstance(df_list, list):
+                            dfs.extend(df_list)
+                        else:
+                            dfs.append(df_list)
+                except Exception as e:
+                    print(f"Error retrieving {link['url']}: {e}")
+
+            if dfs:
+                if stat not in all_dfs:
+                    all_dfs[stat] = []
+                all_dfs[stat].append(pd.concat(dfs, ignore_index=True))
+            else:
+                print(f"No data retrieved for {stat} in {year}")
+
+    # Concatenate per stat across all years
+    final_dfs = {stat: pd.concat(dfs, ignore_index=True) for stat, dfs in all_dfs.items()}
+    return final_dfs
+
 
 def combine_data(years,leagueinfo, table_id):
     leagues = []
