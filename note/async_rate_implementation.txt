@@ -1,0 +1,148 @@
+import asyncio
+import time
+from bs4 import BeautifulSoup, Comment
+import aiohttp
+
+BASE = "https://fbref.com"  # Adjust if needed
+
+# Rate limiter class
+class AsyncRateLimiter:
+    def __init__(self, max_calls: int, period: float):
+        self.max_calls = max_calls
+        self.period = period
+        self.calls = []
+
+    async def acquire(self):
+        now = time.monotonic()
+        # Remove calls older than period
+        self.calls = [t for t in self.calls if t > now - self.period]
+
+        if len(self.calls) >= self.max_calls:
+            wait_time = self.calls[0] + self.period - now
+            await asyncio.sleep(wait_time)
+
+        self.calls.append(time.monotonic())
+
+# Create links
+def create_links(years, leagues):
+    links = []
+    for league in leagues:
+        for year in years:
+            url = league["url"].format(year=year)
+            links.append(url)
+    return links
+
+async def fetch_player_links(session, url, rate_limiter, max_retries=3):
+    """Fetch player links with retry logic and return them as a list."""
+    await rate_limiter.acquire()
+    headers = {"User-Agent": "Mozilla/5.0"}
+    
+    for attempt in range(1, max_retries + 1):
+        try:
+            async with session.get(url, headers=headers, ssl=False, timeout=aiohttp.ClientTimeout(total=15)) as res:
+                if res.status != 200:
+                    raise aiohttp.ClientError(f"HTTP {res.status}")
+                text = await res.text()
+                soup = BeautifulSoup(text, "html.parser")
+
+                table_id = "stats_standard"
+                table = soup.find("table", id=table_id)
+
+                # Parse tables hidden inside comments
+                if not table:
+                    for comment in soup.find_all(string=lambda t: isinstance(t, Comment)):
+                        if table_id in comment:
+                            comment_soup = BeautifulSoup(comment, "html.parser")
+                            table = comment_soup.find("table", id=table_id)
+                            if table:
+                                break
+
+                player_links = []
+                if table:
+                    links_found = [BASE + a["href"] for a in table.select("td[data-stat='player'] a")]
+                    #print(links_found)
+                    player_links.extend(links_found)
+                    print(f"Found {len(links_found)} players in {url}")
+
+                return player_links
+
+        except (aiohttp.ClientError, asyncio.TimeoutError) as e:
+            print(f"Attempt {attempt} failed for {url}: {e}")
+            if attempt < max_retries:
+                wait = 2 ** attempt
+                print(f"Retrying {url} in {wait}s...")
+                await asyncio.sleep(wait)
+            else:
+                print(f" Failed to fetch {url} after {max_retries} attempts")
+                return []
+
+
+# Main async function
+async def main():
+    years = ["2024-2025","2024-2023"]  # example
+    standard_url = [
+    {
+        "name": "Bundesliga",
+        "url": "https://fbref.com/en/comps/20/{year}/stats/{year}-Bundesliga-Stats"
+    },
+    {
+        "name": "Premier League",
+        "url": "https://fbref.com/en/comps/9/{year}/stats/{year}-Premier-League-Stats"
+    },
+    {
+        "name": "La Liga",
+        "url": "https://fbref.com/en/comps/12/{year}/stats/{year}-La-Liga-Stats"
+    },
+    {
+        "name": "Serie A",
+        "url": "https://fbref.com/en/comps/11/{year}/stats/{year}-Serie-A-Stats"
+    },
+    {
+        "name": "Ligue 1",
+        "url": "https://fbref.com/en/comps/13/{year}/stats/{year}-Ligue-1-Stats"
+    },
+    {
+        "name": "Eredivisie",
+        "url": "https://fbref.com/en/comps/23/{year}/stats/{year}-Eredivisie-Stats"
+    },
+    {
+        "name": "Primeira Liga",
+        "url": "https://fbref.com/en/comps/32/{year}/stats/{year}-Primeira-Liga-Stats"
+    },
+    {
+        "name": "Championship",
+        "url": "https://fbref.com/en/comps/10/{year}/stats/{year}-EFL-Championship-Stats"
+    },
+    {
+        "name": "Scottish Premiership",
+        "url": "https://fbref.com/en/comps/40/{year}/stats/{year}-Scottish-Premiership-Stats"
+    }
+
+]
+    
+    links = create_links(years, standard_url)
+    print(links)
+    player_links = []
+    rate_limiter = AsyncRateLimiter(max_calls=10, period=60)  # 10 requests per minute
+    
+    async with aiohttp.ClientSession() as session:
+        tasks = [fetch_player_links(session, link, rate_limiter) for link in links]
+        await asyncio.gather(*tasks)
+    
+    player_links = [links for sublist in player_links for links in sublist]
+    print(f"Total player links found: {len(player_links)}")
+
+    
+
+
+# Run the async main
+asyncio.run(main())
+
+
+'''
+if table:
+                    links_found = [BASE + a["href"] for a in table.select("td[data-stat='player'] a")]
+                    #print(links_found)
+                    player_links.extend(links_found)
+                    print(f"Found {len(links_found)} players in {url}")
+    '''
