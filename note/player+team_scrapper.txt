@@ -32,7 +32,8 @@ def scrape_all_stats(name, url, table_id, retries =3):
     # Check if table is hidden inside comments
     if not table:
         for comment in soup.find_all(string=lambda text: isinstance(text, Comment)):
-            if table_id in comment:
+            #Check this when home
+            if table_id and table_id in comment: 
                 comment_soup = BeautifulSoup(comment, 'html.parser')
                 table = comment_soup.find('table', id=table_id)
                 if table:
