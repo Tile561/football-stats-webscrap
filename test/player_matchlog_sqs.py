@@ -2,10 +2,11 @@ import requests
 import pandas as pd
 from bs4 import BeautifulSoup, Comment
 import time
-from config import HEADERS, BASE, player_matchlog_categories, years, standard_url, create_sqs_message
+from config import HEADERS, BASE, player_matchlog_categories, years, standard_url
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 import random
+import re
 from scrappers import scrape_player_stats
 
 
@@ -41,6 +42,8 @@ def get_headers():
         "Referer": "https://google.com",
     }
 
+session = create_session()
+
 def create_links(years, leagues):
     links = []
     for league in leagues:
@@ -53,6 +56,7 @@ def get_player_links(years, leagues, retries = 3):
     links = create_links(years, leagues)
     headers = get_headers()
     player_links = []
+    player_data = []
 
 
     for link in links:
@@ -62,6 +66,15 @@ def get_player_links(years, leagues, retries = 3):
         except requests.exceptions.RequestException as e:
             print(f"Request failed for {link}: {e}")
             continue
+
+        match = re.search(r'/comps/\d+/(\d{4}-\d{4})/stats/\1-(.*?)-Stats', link)
+        if match:
+            year = match.group(1)
+            league_name = match.group(2).replace("-", " ")
+        else:
+            year = "Unknown"
+            league_name = "Unknown"
+
         
         if response.status_code in [403, 429]:
             if retries > 0:
@@ -90,29 +103,40 @@ def get_player_links(years, leagues, retries = 3):
         if table: 
             player_links = [BASE + a["href"] for a in table.select("td[data-stat='player'] a")]
 
+            for player_link in player_links:
+                player_data.append({
+                    "year": year,
+                    "league": league_name,
+                    "link":player_link
+                })
+
         time.sleep(5)
-    return player_links
+    return player_data
 
 def make_matchlog_links(player_urls):
-    links = {stat: [] for stat in player_matchlog_categories}
-    #links = []
+    links = []
 
-    for url in set(player_urls):
+    for player in player_urls:
+        url = player["link"]
+        year = player["year"]
+        #league  = player["league"]
+
+
         parts = url.strip("/").split("/")
+
+        if len(parts) < 2:
+            continue
+
         player_id = parts[-2]
         player_slug = parts[-1]
 
-        #extract year if present in the url
-        year = next((p for p in parts if "-" in p and p[:4].isdigit()), None)
-        if not year: 
-            continue
         for stat in player_matchlog_categories:
             matchlog_url = f"https://fbref.com/en/players/{player_id}/matchlogs/{year}/{stat}/{player_slug}-Match-Logs"
             links.append({
                 "name": f"{player_slug} - {stat}",
                 "url": matchlog_url
             })
-    unique_links = {links["url"]: link for link in links}.values
+    unique_links = {links["url"]: link for link in links}.values()
     return unique_links
 
 def create_matchlog_sqs_message(links):
@@ -127,7 +151,6 @@ def create_matchlog_sqs_message(links):
     return jobs
 
 
-session = create_session()
 player_links = get_player_links(years, standard_url)
 links = make_matchlog_links(player_links)
 jobs = create_matchlog_sqs_message(links)
@@ -139,6 +162,9 @@ for job in jobs:
 
 
 
+
+
+    
 
 
     
