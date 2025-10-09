@@ -93,7 +93,7 @@ def get_player_links(years, leagues, retries = 3):
         time.sleep(5)
     return player_links
 
-def make_matchlog_links(player_urls, years):
+def make_matchlog_links(player_urls):
     links = {stat: [] for stat in player_matchlog_categories}
     #links = []
 
@@ -102,15 +102,16 @@ def make_matchlog_links(player_urls, years):
         player_id = parts[-2]
         player_slug = parts[-1]
 
-        for year in years:
-            for stat in player_matchlog_categories:
-                matchlog_url = f"https://fbref.com/en/players/{player_id}/matchlogs/{year}/{stat}/{player_slug}-Match-Logs"
-                links.append({
-                    "name": f"{player_slug} - {stat}",
-                    "url": matchlog_url
-                })
-
-
+        #extract year if present in the url
+        year = next((p for p in parts if "-" in p and p[:4].isdigit()), None)
+        if not year: 
+            continue
+        for stat in player_matchlog_categories:
+            matchlog_url = f"https://fbref.com/en/players/{player_id}/matchlogs/{year}/{stat}/{player_slug}-Match-Logs"
+            links.append({
+                "name": f"{player_slug} - {stat}",
+                "url": matchlog_url
+            })
     unique_links = {links["url"]: link for link in links}.values
     return unique_links
 
@@ -128,15 +129,13 @@ def create_matchlog_sqs_message(links):
 
 session = create_session()
 player_links = get_player_links(years, standard_url)
-links = make_matchlog_links(player_links, years)
+links = make_matchlog_links(player_links)
 jobs = create_matchlog_sqs_message(links)
 
 dfs = []
 for job in jobs:
     df = scrape_player_stats(job["player_name"], job["player_url"], job["table_id"])
     dfs.append(df)
-
-
 
 
 
