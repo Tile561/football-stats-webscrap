@@ -1,9 +1,22 @@
 import boto3
 import json
+from scrappers.scrappers import scrape_player_stats
 
-sqs = boto3.client("sqs", region_name="us-east-1")
+from pprint import pprint
 
-queue_url = "https://sqs.us-east-1.amazonaws.com/YOUR_ACCOUNT_ID/fbref-jobs"
+sqs = boto3.client(
+    "sqs",
+    region_name="us-east-1",
+    endpoint_url="https://localhost.localstack.cloud:4566",
+    aws_access_key_id="test",
+    aws_secret_access_key="test",
+    aws_session_token="test"  # optional
+)
+
+
+queue_url = "https://localhost.localstack.cloud:4566/117446093992/fbref"
+
+print(f"SQS Queue URL: {queue_url}")
 
 leagues = [
     {"name": "Bundesliga", "id": 20},
@@ -81,17 +94,7 @@ categories_match = {
 }
 
 
-def build_leagueinfo(leagues, category):
-    leagueinfo = []
-    for league in leagues:
-        leagueinfo.append({
-            "name": league["name"],
-            "url": f"https://fbref.com/en/comps/{league['id']}/{{year}}/{category}/{{year}}-{league['name'].replace(' ', '-')}-Stats"
-        })
-    return leagueinfo
-
-
-
+jobs = []
 for league in leagues:
     for year in years:
         for category, tables in categories.items():
@@ -105,10 +108,12 @@ for league in leagues:
                     "df_name": name,
                     "table_id": table_id
                 }
-                print(json.dumps(job, indent=4,ensure_ascii=False))
+                jobs.append(job)
+                #print(job)
+                #print(json.dumps(job, indent=4,ensure_ascii=False))
 
 
-
+match_jobs = []
 for league in leagues:
     for year in years:
         for category_match, tables_match in categories_match.items():
@@ -122,5 +127,59 @@ for league in leagues:
                     "df_name": name_match,
                     "table_id": table_id_match
                 }
-                print(json.dumps(job, indent=4,ensure_ascii=False))
+                match_jobs.append(job) 
+                #print(json.dumps(job, indent=4,ensure_ascii=False))
+                #pprint(job)
 
+
+for job in jobs[:5]:  # sending only first 5 jobs for testing
+    sqs.send_message(
+        QueueUrl=queue_url,
+        MessageBody=json.dumps(job, ensure_ascii=False)
+    )
+
+messages = sqs.receive_message(
+    QueueUrl=queue_url,
+    MaxNumberOfMessages=10,
+    WaitTimeSeconds=2
+)
+
+if "Messages" in messages:
+    for msg in messages["Messages"]:
+        job = json.loads(msg["Body"])
+        pprint(job)
+
+        # Optional: scrape data locally
+        df = scrape_player_stats(job["df_name"], job["league_url"], job["table_id"])
+        # print(df.head())
+
+        # Delete message after processing
+        sqs.delete_message(
+            QueueUrl=queue_url,
+            ReceiptHandle=msg["ReceiptHandle"]
+        )   
+
+
+'''
+# Print first 5 jobs for quick inspection
+print("\n--- Sample Jobs ---\n")
+for job in jobs[:5]:
+    df = scrape_player_stats(
+        job["df_name"], 
+        job["league_url"], 
+        job["table_id"]
+    )
+    print(f"\n--- {job['league_name']} {job['year']} ---")
+    print(df.head())
+    
+
+# Optional: test scraping function on the first job
+# from scrappers.scrappers import scrape_player_stats
+df = scrape_player_stats(
+    jobs[0]["df_name"], 
+    jobs[0]["league_url"], 
+    jobs[0]["table_id"]
+)
+
+print(df.head())
+'''

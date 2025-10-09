@@ -1,12 +1,66 @@
 import pandas as pd
 from config import years, leagues, categories, categories_match, standard_url, stats
 from pipeline.url_builder import build_leagueinfo
+from scrappers.scrappers import scrape_player_stats, scrape_match_data
+from pipeline.url_builder import build_leagueinfo
 from scrappers.scrappers import combine_data, combine_match_data
 from scrappers.scrappers import get_player_links, get_match_logs
+import json 
+import boto3
 import os
+
+
+sqs = boto3.client(
+    "sqs",
+    region_name="us-east-1",
+    endpoint_url="https://localhost.localstack.cloud:4566",
+    aws_access_key_id="test",
+    aws_secret_access_key="test",
+    aws_session_token="test"  # optional
+)
+
+
+queue_url = "https://localhost.localstack.cloud:4566/117446093992/fbref"
 
 def main():
 
+    #  Get a message from SQS
+    response = sqs.receive_message(
+        QueueUrl=queue_url,
+        MaxNumberOfMessages=1,
+        WaitTimeSeconds=5,
+    )
+
+    if "Messages" not in response:
+        print("No messages in queue.")
+        return
+
+    message = response["Messages"][0]
+    receipt_handle = message["ReceiptHandle"]
+    job = json.loads(message["Body"])
+    print(f"Processing job: {job}")
+
+    # Scrape one dataset
+    df = scrape_match_data(
+        job["league_name"], 
+        job["league_url"], 
+        job["table_id"]
+    )
+
+    #Save output (locally for testing)
+    if df is not None:
+        os.makedirs("data/raw", exist_ok=True)
+        filename = f"{job['league_name'].replace(' ', '_')}_{job['year']}_{job['df_name']}.csv"
+        filepath = os.path.join("data/raw", filename)
+        df.to_csv(filepath, index=False)
+        print(f"Saved: {filepath}")
+    else:
+        print("No data scraped.")
+
+    #Delete message from SQS to prevent reprocessing
+    #sqs.delete_message(QueueUrl=queue_url, ReceiptHandle=receipt_handle)
+    #print("Deleted job from queue.")
+    
     player_links = get_player_links(years, standard_url)
 
     #player_links = player_links[:5]
@@ -29,6 +83,7 @@ if __name__ == "__main__":
 
 
 '''
+    
     # Stats categories
     dataframes = {}
     for category, tables in categories.items():

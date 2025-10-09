@@ -12,9 +12,9 @@ import random
 def create_session():
     retry_strategy = Retry(
         total=3,  # Total retry attempts
-        backoff_factor=1,  # Exponential backoff: 1s, 2s, 4s...
+        backoff_factor=1, 
         status_forcelist=[429, 500, 502, 503, 504],  # Retry on these HTTP codes
-        allowed_methods=["HEAD", "GET", "OPTIONS"],
+        allowed_methods=["HEAD", "GET", "OPTIONS", "POST"],
         raise_on_status=False
     )
     adapter = HTTPAdapter(max_retries=retry_strategy)
@@ -25,28 +25,44 @@ def create_session():
 
 session = create_session()
 
-def scrape_player_stats(name, url, table_id):
-    """Scrape player statistics table for a given league and season."""
-    warnings.filterwarnings("ignore")
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                      "AppleWebKit/537.36 (KHTML, like Gecko) "
-                      "Chrome/115.0.0.0 Safari/537.36",
+USER_AGENTS = [
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 "
+    "(KHTML, like Gecko) Version/15.6 Safari/605.1.15",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/118.0.5993.70 Safari/537.36",
+]
+
+def get_headers():
+    return {
+        "User-Agent": random.choice(USER_AGENTS),
         "Accept-Language": "en-US,en;q=0.9",
+        "Accept": "text/html,application/xhtml+xml",
+        "Referer": "https://google.com",
     }
 
+def scrape_player_stats(name, url, table_id, retries =3):
+    """Scrape player statistics table for a given league and season."""
+    warnings.filterwarnings("ignore")
+    headers = get_headers()
     try:
         response = session.get(url, headers=headers, timeout=15)
         print(response.status_code, url)
     except requests.exceptions.RequestException as e:
         print(f"Request failed for {url}: {e}")
-        return None
+        return pd.DataFrame()
 
     if response.status_code in [403, 429]:
-        print(f"Blocked or rate-limited ({response.status_code}) at {url}")
-        time.sleep(random.uniform(5, 10))  # backoff with jitter
-        return None
-
+        if retries > 0:
+            retry_after = int(response.headers.get("Retry-After", 10))
+            print(f"Blocked or rate-limited ({response.status_code}) at {url}")
+            time.sleep(retry_after + random.uniform(1,3))
+            return scrape_player_stats(name, url, table_id, retries - 1)
+        else:
+            print(f"Max retries exceeded for this {url}")
+            return pd.DataFrame()
+        
     soup = BeautifulSoup(response.content, 'html.parser')
     table = soup.find("table", id=table_id)
 
@@ -62,7 +78,7 @@ def scrape_player_stats(name, url, table_id):
 
     if not table:
         print(f"Table not found for {name} ({table_id})")
-        return None
+        return pd.DataFrame()
 
     # Parse table into DataFrame
     try:
@@ -71,31 +87,35 @@ def scrape_player_stats(name, url, table_id):
         return df
     except Exception as e:
         print(f"Error parsing table for {name}: {e}")
-        return None
+        return pd.DataFrame()
 
 
-
-def scrape_match_data(league_name, url, table_id=None):
+def scrape_match_data(league_name, url, table_id=None, retries=3):
     warnings.filterwarnings("ignore")
-    headers = {"User-Agent": "Mozilla/5.0"}
+    headers = get_headers()
     
     try:
         response = session.get(url, headers=headers, timeout=15)
         print(response.status_code, url)
     except requests.exceptions.RequestException as e:
         print(f"Request failed for {url}: {e}")
-        return None
+        return pd.DataFrame()
 
     if response.status_code in [403, 429]:
-        print(f"Blocked or rate-limited ({response.status_code}) at {url}")
-        time.sleep(5)
-        return None
+        if retries > 0:
+            retry_after = int(response.headers.get("Retry-After", 10))
+            print(f"Blocked or rate-limited ({response.status_code}) at {url}")
+            time.sleep(retry_after + random.uniform(1,3))
+            return scrape_match_data(league_name, url, table_id=None, retries=retries - 1)
+        else:
+            print(f"Max retries exceeded for this {url}")
+            return pd.DataFrame()
 
     soup = BeautifulSoup(response.content, 'html.parser')
     table = soup.find("table", id=table_id) if table_id else soup.find("table")
     if not table:
         print(f"Table not found for {league_name}")
-        return None
+        return pd.DataFrame()
 
     try:
         df = pd.read_html(str(table))[0]
@@ -103,7 +123,7 @@ def scrape_match_data(league_name, url, table_id=None):
         return df
     except Exception as e:
         print(f"Error parsing match data for {league_name}: {e}")
-        return None
+        return pd.DataFrame()
 
 
 
@@ -142,7 +162,6 @@ def get_player_links(years, leagues):
 
 def get_match_logs(years, player_links, stats):
     all_dfs = {}
-<<<<<<< HEAD
 
     # Loop over years one by one (newest to oldest, if list is ordered that way)
     for year in years:
@@ -175,25 +194,6 @@ def get_match_logs(years, player_links, stats):
     final_dfs = {stat: pd.concat(dfs, ignore_index=True) for stat, dfs in all_dfs.items()}
     return final_dfs
 
-=======
-    for stat, links in matchlog_links.items():
-        dfs = []
-        for link in links:
-            try:
-                df_list = combine_data(years, [link], table_id="matchlogs_all")  # may return a list
-                if df_list:  
-                    if isinstance(df_list, list):
-                        dfs.extend(df_list)
-                    else:
-                        dfs.append(df_list)
-            except Exception as e:
-                print(f"Error retrieving {link['url']}: {e}")
-        if dfs:
-            all_dfs[stat] = pd.concat(dfs, ignore_index=True)
-        else:
-            print(f"No data retrieved for category {stat}")
-    return all_dfs
->>>>>>> d6b6453e005b926b4301cf65eeacc39ad6d50764
 
 def combine_data(years,leagueinfo, table_id):
     leagues = []
