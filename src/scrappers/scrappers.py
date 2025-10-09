@@ -84,6 +84,7 @@ def scrape_player_stats(name, url, table_id, retries =3):
     try:
         df = pd.read_html(str(table), header=1)[0]
         df['League'] = name
+        time.sleep(5)
         return df
     except Exception as e:
         print(f"Error parsing table for {name}: {e}")
@@ -120,6 +121,7 @@ def scrape_match_data(league_name, url, table_id=None, retries=3):
     try:
         df = pd.read_html(str(table))[0]
         df['League'] = league_name
+        time.sleep(5)
         return df
     except Exception as e:
         print(f"Error parsing match data for {league_name}: {e}")
@@ -243,3 +245,58 @@ def combine_match_data(years,leagueinfo,table_id):
     except KeyboardInterrupt:
         print("Scraping interrupted")
     return combined_list
+
+def scrape_all_stats(name, url, table_id, retries =3):
+    warnings.filterwarnings("ignore")
+    headers = get_headers()
+    try:
+        response = session.get(url, headers=headers, timeout=15)
+        print(response.status_code, url)
+    except requests.exceptions.RequestException as e:
+        print(f"Request failed for {url}: {e}")
+        return pd.DataFrame()
+
+    if response.status_code in [403, 429]:
+        if retries > 0:
+            retry_after = int(response.headers.get("Retry-After", 10))
+            print(f"Blocked or rate-limited ({response.status_code}) at {url}")
+            time.sleep(retry_after + random.uniform(1,3))
+            return scrape_player_stats(name, url, table_id, retries - 1)
+        else:
+            print(f"Max retries exceeded for this {url}")
+            return pd.DataFrame()
+        
+    soup = BeautifulSoup(response.content, 'html.parser')
+
+
+    if table_id is None:
+        table = soup.find("table")
+    else:
+        table = soup.find ("table", id = table_id)
+    
+    #table = soup.find("table", id=table_id)
+
+    # Check if table is hidden inside comments
+    if not table:
+        for comment in soup.find_all(string=lambda text: isinstance(text, Comment)):
+            #Check this when home
+            if table_id and table_id in comment: 
+                comment_soup = BeautifulSoup(comment, 'html.parser')
+                table = comment_soup.find('table', id=table_id)
+                if table:
+                    print(f"Found {table_id} in comment for {name}")
+                    break
+
+    if not table:
+        print(f"Table not found for {name} ({table_id})")
+        return pd.DataFrame()
+
+    # Parse table into DataFrame
+    try:
+        df = pd.read_html(str(table), header=1)[0]
+        df['League'] = name
+        time.sleep(5)
+        return df
+    except Exception as e:
+        print(f"Error parsing table for {name}: {e}")
+        return pd.DataFrame()

@@ -1,5 +1,5 @@
 import pandas as pd
-from config import years, leagues, categories, categories_match, standard_url, stats
+from config import years, leagues, categories, categories_match, standard_url, player_matchlog_categories
 from pipeline.url_builder import build_leagueinfo
 from scrappers.scrappers import scrape_player_stats, scrape_match_data
 from pipeline.url_builder import build_leagueinfo
@@ -65,7 +65,7 @@ def main():
 
     #player_links = player_links[:5]
     #print(player_links)
-    all_match_logs = get_match_logs(years, player_links, stats)
+    all_match_logs = get_match_logs(years, player_links, player_matchlog_categories)
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     data_path = os.path.join(project_root, "data", "raw")

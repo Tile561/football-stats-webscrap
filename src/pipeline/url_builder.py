@@ -1,4 +1,4 @@
-from config import stats
+from config import player_matchlog_categories
 
 
 def build_leagueinfo(leagues, category):
@@ -31,7 +31,7 @@ def make_matchlog_links(player_urls, years, stats):
         player_slug = parts[-1]
 
         for year in years:
-            for stat in stats:
+            for stat in player_matchlog_categories:
                 key = (player_id, year, stat)
                 if key in seen:
                     continue

@@ -1,3 +1,4 @@
+print("✅ Script started...")
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup, Comment
@@ -7,8 +8,10 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 import random
 import re
-from scrappers import scrape_player_stats
+from scrappers.scrappers import scrape_all_stats
 
+import logging
+logging.basicConfig(level=logging.DEBUG)
 
 
 def create_session():
@@ -67,6 +70,15 @@ def get_player_links(years, leagues, retries = 3):
             print(f"Request failed for {link}: {e}")
             continue
 
+        if response.status_code == 429:
+            wait_time = random.randint(30, 60)
+            print(f"⚠️ Rate limited! Waiting {wait_time} seconds before retrying...")
+            time.sleep(wait_time)
+            continue
+        elif response.status_code in [403, 500]:
+            print(f"⚠️ Skipping {link} due to HTTP {response.status_code}")
+            continue
+
         match = re.search(r'/comps/\d+/(\d{4}-\d{4})/stats/\1-(.*?)-Stats', link)
         if match:
             year = match.group(1)
@@ -102,6 +114,8 @@ def get_player_links(years, leagues, retries = 3):
         
         if table: 
             player_links = [BASE + a["href"] for a in table.select("td[data-stat='player'] a")]
+            print(f"Found {len(player_links)} players for {league_name} {year}")
+
 
             for player_link in player_links:
                 player_data.append({
@@ -136,7 +150,7 @@ def make_matchlog_links(player_urls):
                 "name": f"{player_slug} - {stat}",
                 "url": matchlog_url
             })
-    unique_links = {links["url"]: link for link in links}.values()
+    unique_links = {link["url"]: link for link in links}.values()
     return unique_links
 
 def create_matchlog_sqs_message(links):
@@ -157,7 +171,8 @@ jobs = create_matchlog_sqs_message(links)
 
 dfs = []
 for job in jobs:
-    df = scrape_player_stats(job["player_name"], job["player_url"], job["table_id"])
+    print(f"Scraping {job['player_name']} from {job['player_url']}")
+    df = scrape_all_stats(job["player_name"], job["player_url"], job["table_id"])
     dfs.append(df)
 
 
