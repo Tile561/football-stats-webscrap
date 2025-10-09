@@ -1,179 +1,4 @@
-Great question 👍 since you’re looping through **categories → tables → dataframes**, the project is structured around scraping + cleaning + organizing football stats. A good folder structure will keep **raw data**, **scripts**, and **outputs** separated so it doesn’t get messy when you scale up.
-
-Here’s how I would format it:
-
-```
-football_project/
-│
-├── data/                       # all datasets
-│   ├── raw/                    # untouched CSVs, backups from scraping
-│   ├── processed/              # cleaned/combined dataframes
-│   └── final/                  # exports ready for analysis/visualization
-│
-├── notebooks/                  # Jupyter/Colab exploration
-│   ├── 01_scraping_demo.ipynb
-│   ├── 02_cleaning_demo.ipynb
-│   └── 03_visualization_demo.ipynb
-│
-├── src/                        # core Python code
-│   ├── __init__.py
-│   ├── scrape/                 # scraping modules
-│   │   ├── fbref_scraper.py
-│   │   └── utils.py
-│   │
-│   ├── processing/             # data wrangling / ETL
-│   │   ├── combine_data.py
-│   │   ├── cleaning.py
-│   │   └── transformations.py
-│   │
-│   ├── config/                 # configs for categories, tables, leagues
-│   │   ├── categories.py
-│   │   ├── leagues.py
-│   │   └── settings.py
-│   │
-│   └── pipeline.py             # main orchestrator (loops through categories/tables)
-│
-├── tests/                      # unit tests
-│   ├── test_scraper.py
-│   ├── test_processing.py
-│   └── test_pipeline.py
-│
-├── reports/                    # documentation, markdown, exports
-│   ├── README.md
-│   └── project_notes.md
-│
-├── requirements.txt            # dependencies
-└── main.py                     # entry point (could run the whole pipeline)
-```
-
----
-
-### 🔎 Why this works
-
-* **`data/`** → separates raw backups, processed versions, and final outputs.
-* **`src/`** → all actual code lives here, broken into scraping, processing, and configs.
-* **`pipeline.py` / `main.py`** → where your loop (`for category, tables in categories.items()`) would run.
-* **`config/`** → makes it easy to update categories/tables/leagues without touching logic.
-* **`notebooks/`** → keep exploration separate from production code.
-* **`tests/`** → ensures scraping + combining works correctly.
-
----
-
-⚡ Optional improvements if project grows:
-
-* Add `pyproject.toml` (modern dependency + project config).
-* Add logging (`logs/` folder).
-* Dockerize if you want portability.
-
----
----------------------------------------------------------------------------------------------------------------------------------
-Perfect 👍 let’s take your loop
-
-```python
-for category, tables in categories.items():
-    leagueinfo = build_leagueinfo(leagues, category)
-    for name, table_id in tables:
-        dfs = combine_data(years, leagueinfo, table_id=table_id)  
-        dataframes[name] = dfs
-```
-
-and **map it into the folder structure** I suggested.
-
----
-
-### 📂 Where things go
-
-```
-football_project/
-│
-├── data/                       # data outputs (csv, parquet, etc.)
-│   ├── raw/
-│   ├── processed/
-│   └── final/
-│
-├── src/
-│   ├── __init__.py
-│   │
-│   ├── config/                 # config files
-│   │   ├── categories.py       # <- where categories dict lives
-│   │   ├── leagues.py          # <- list/dict of leagues
-│   │   └── settings.py         # <- global params (years, paths, etc.)
-│   │
-│   ├── scrape/
-│   │   └── fbref_scraper.py    # raw scraping functions (if any)
-│   │
-│   ├── processing/
-│   │   ├── combine_data.py     # <- combine_data() function
-│   │   └── build_leagueinfo.py # <- build_leagueinfo() function
-│   │
-│   └── pipeline.py             # <- where your for-loop orchestration lives
-│
-└── main.py                     # entry point (runs pipeline)
-```
-
----
-
-### 🔧 Example content
-
-**`src/config/categories.py`**
-
-```python
-categories = {
-    "shooting": [
-        ("standard", "table_id_1"),
-        ("advanced", "table_id_2")
-    ],
-    "passing": [
-        ("short_pass", "table_id_3"),
-        ("long_pass", "table_id_4")
-    ]
-}
-```
-
-**`src/config/leagues.py`**
-
-```python
-leagues = ["EPL", "LaLiga", "SerieA"]
-```
-
-**`src/config/settings.py`**
-
-```python
-years = list(range(2015, 2025))  # for example
-```
-
-**`src/processing/build_leagueinfo.py`**
-
-```python
-def build_leagueinfo(leagues, category):
-    # return metadata for the given category
-    return {"leagues": leagues, "category": category}
-```
-
-**`src/processing/combine_data.py`**
-
-```python
-def combine_data(years, leagueinfo, table_id):
-    # placeholder: real version would scrape + merge across years
-    import pandas as pd
-    return pd.DataFrame({
-        "year": years,
-        "league": leagueinfo["leagues"][0],
-        "category": leagueinfo["category"],
-        "table_id": table_id
-    })
-```
-
-**`src/pipeline.py`**
-
-```python
-from src.config.categories import categories
-from src.config.leagues import leagues
-from src.config.settings import years
-from src.processing.build_leagueinfo import build_leagueinfo
-from src.processing.combine_data import combine_data
-
-def run_pipeline():
+def collect_stats(years, leagues, categories):
     dataframes = {}
     for category, tables in categories.items():
         leagueinfo = build_leagueinfo(leagues, category)
@@ -181,30 +6,51 @@ def run_pipeline():
             dfs = combine_data(years, leagueinfo, table_id=table_id)
             dataframes[name] = dfs
     return dataframes
-```
 
-**`main.py`**
 
-```python
-from src.pipeline import run_pipeline
+def collect_match_stats(years, leagues, categories_match):
+    dataframes_match = {}
+    for category, tables in categories_match.items():
+        leagueinfo = build_leagueinfo(leagues, category)
+        for name, table_id in tables:
+            dfs = combine_match_data(years, leagueinfo, table_id=table_id)
+            dataframes_match[name] = dfs
+    return dataframes_match
 
-if __name__ == "__main__":
-    dataframes = run_pipeline()
-    # Example: save outputs
-    for name, df in dataframes.items():
-        df.to_csv(f"data/processed/{name}.csv", index=False)
-```
 
----
+def save_dataframes(dataframes, output_dir, prefix="raw"):
+    os.makedirs(output_dir, exist_ok=True)
+    for name, dfs in dataframes.items():
+        if isinstance(dfs, list):
+            if dfs:
+                df = pd.concat(dfs, ignore_index=True)
+            else:
+                print(f"No data found for {name}")
+                continue
+        else:
+            df = dfs
+        df.to_csv(os.path.join(output_dir, f"{prefix}_{name}.csv"), index=False)
 
-👉 This way your project is **modular**:
 
-* Change categories in `categories.py`
-* Change leagues in `leagues.py`
-* Change years in `settings.py`
-* Core logic (`combine_data`, `build_leagueinfo`) stay clean in `processing/`
-* Loop orchestration is in `pipeline.py`
-* Running everything happens in `main.py`
+def collect_player_match_logs(years, standard_url, stats, output_dir):
+    player_links = get_player_links(years, standard_url)
+    all_match_logs = get_match_logs(years, player_links, stats)
 
----
+    os.makedirs(output_dir, exist_ok=True)
+    for stat, df in all_match_logs.items():
+        output_path = os.path.join(output_dir, f"player_match_logs_{stat}.csv")
+        df.to_csv(output_path, index=False)
+        print(f"Saved {stat} match logs to {output_path}")
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+def main():
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    data_path = os.path.join(project_root, "data", "raw")
+
+    stats_dfs = collect_stats(years, leagues, categories)
+    save_dataframes(stats_dfs, data_path, prefix="raw")
+
+    match_dfs = collect_match_stats(years, leagues, categories_match)
+    save_dataframes(match_dfs, data_path, prefix="raw")
+
+    collect_player_match_logs(years, standard_url, stats, data_path)
 
