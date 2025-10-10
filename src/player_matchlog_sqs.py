@@ -167,6 +167,7 @@ def create_matchlog_sqs_message(links):
 
 player_links = get_player_links(years, standard_url)
 links = make_matchlog_links(player_links)
+links = list(links)[:5]
 jobs = create_matchlog_sqs_message(links)
 
 dfs = []
