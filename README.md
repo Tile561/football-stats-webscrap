@@ -1,4 +1,4 @@
-#  Football Data Engineering — Scraping + Pipeline (Work In Progress)
+#  Football Data Engineering Data Pipeline (Work In Progress)
 
 > **Status:** Active development / exploration  
 > **Note:** This repo is intentionally messy — it’s my scratchpad for ideas, tests, and code experiments.
