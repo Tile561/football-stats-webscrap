@@ -29,3 +29,7 @@ A polished GitHub repo with:
 
 Right now the repo **does not follow a final structure**.
 
+## ✉️ Contact
+
+**Author:** James Merilien  
+**Focus:** Data Engineering / AWS learning
