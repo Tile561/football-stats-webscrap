@@ -1,8 +1,8 @@
 
 HEADERS = {"User-Agent": "Mozilla/5.0"}
 BASE = "https://fbref.com"
-years = ["2024-2025","2023-2024","2022-2023","2021-2022","2020-2021","2019-2020","2018-2019","2017-2018","2016-2017","2015-2016","2014-2015","2013-2014","2012-2013","2011-2012","2010-2011"]
-
+years = ["2024-2025"]
+#,"2023-2024","2022-2023","2021-2022","2020-2021","2019-2020","2018-2019","2017-2018","2016-2017","2015-2016","2014-2015","2013-2014","2012-2013","2011-2012","2010-2011"
 leagues = [
     {"name": "Bundesliga", "id": 20},
     {"name": "Premier League", "id": 9},
@@ -24,7 +24,12 @@ standard_url = [
         "name": "Bundesliga",
         "url": "https://fbref.com/en/comps/20/{year}/stats/{year}-Bundesliga-Stats"
     },
-    {
+
+   
+]
+
+'''
+     {
         "name": "Premier League",
         "url": "https://fbref.com/en/comps/9/{year}/stats/{year}-Premier-League-Stats"
     },
@@ -76,9 +81,6 @@ standard_url = [
         "name": "Turkish Süper Lig",
         "url": "https://fbref.com/en/comps/26/{year}/stats/{year}-Super-Lig-Stats"
     }
-]
-
-'''
 
 '''
 # stat categories
@@ -200,4 +202,4 @@ team_tables = exclude_team_tables.union(exclude_tables_against)
 against_tables = {table for table in team_tables if "against" in table}
 
 
-stats = ["summary","defense","passing","gca","possession","passing_types","keeper"]
+player_matchlog_categories = ["summary","defense","passing","gca","possession","passing_types","keeper"]

@@ -1,148 +1,110 @@
 import asyncio
-import time
-from bs4 import BeautifulSoup, Comment
 import aiohttp
+import random
+import time
+import pandas as pd
+from bs4 import BeautifulSoup, Comment
+import warnings
 
-BASE = "https://fbref.com"  # Adjust if needed
+MAX_REQUESTS_PER_MIN = 10
+REQUEST_INTERVAL = 60 / MAX_REQUESTS_PER_MIN  # 6 seconds
+MAX_CONCURRENT = 3
+MAX_RETRIES = 3
 
-# Rate limiter class
-class AsyncRateLimiter:
-    def __init__(self, max_calls: int, period: float):
-        self.max_calls = max_calls
-        self.period = period
-        self.calls = []
+semaphore = asyncio.Semaphore(MAX_CONCURRENT)
 
-    async def acquire(self):
-        now = time.monotonic()
-        # Remove calls older than period
-        self.calls = [t for t in self.calls if t > now - self.period]
+USER_AGENTS = [
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 "
+    "(KHTML, like Gecko) Version/15.6 Safari/605.1.15",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/118.0.5993.70 Safari/537.36",
+]
 
-        if len(self.calls) >= self.max_calls:
-            wait_time = self.calls[0] + self.period - now
-            await asyncio.sleep(wait_time)
-
-        self.calls.append(time.monotonic())
-
-# Create links
-def create_links(years, leagues):
-    links = []
-    for league in leagues:
-        for year in years:
-            url = league["url"].format(year=year)
-            links.append(url)
-    return links
-
-async def fetch_player_links(session, url, rate_limiter, max_retries=3):
-    """Fetch player links with retry logic and return them as a list."""
-    await rate_limiter.acquire()
-    headers = {"User-Agent": "Mozilla/5.0"}
-    
-    for attempt in range(1, max_retries + 1):
-        try:
-            async with session.get(url, headers=headers, ssl=False, timeout=aiohttp.ClientTimeout(total=15)) as res:
-                if res.status != 200:
-                    raise aiohttp.ClientError(f"HTTP {res.status}")
-                text = await res.text()
-                soup = BeautifulSoup(text, "html.parser")
-
-                table_id = "stats_standard"
-                table = soup.find("table", id=table_id)
-
-                # Parse tables hidden inside comments
-                if not table:
-                    for comment in soup.find_all(string=lambda t: isinstance(t, Comment)):
-                        if table_id in comment:
-                            comment_soup = BeautifulSoup(comment, "html.parser")
-                            table = comment_soup.find("table", id=table_id)
-                            if table:
-                                break
-
-                player_links = []
-                if table:
-                    links_found = [BASE + a["href"] for a in table.select("td[data-stat='player'] a")]
-                    #print(links_found)
-                    player_links.extend(links_found)
-                    print(f"Found {len(links_found)} players in {url}")
-
-                return player_links
-
-        except (aiohttp.ClientError, asyncio.TimeoutError) as e:
-            print(f"Attempt {attempt} failed for {url}: {e}")
-            if attempt < max_retries:
-                wait = 2 ** attempt
-                print(f"Retrying {url} in {wait}s...")
-                await asyncio.sleep(wait)
-            else:
-                print(f" Failed to fetch {url} after {max_retries} attempts")
-                return []
-
-
-# Main async function
-async def main():
-    years = ["2024-2025","2024-2023"]  # example
-    standard_url = [
-    {
-        "name": "Bundesliga",
-        "url": "https://fbref.com/en/comps/20/{year}/stats/{year}-Bundesliga-Stats"
-    },
-    {
-        "name": "Premier League",
-        "url": "https://fbref.com/en/comps/9/{year}/stats/{year}-Premier-League-Stats"
-    },
-    {
-        "name": "La Liga",
-        "url": "https://fbref.com/en/comps/12/{year}/stats/{year}-La-Liga-Stats"
-    },
-    {
-        "name": "Serie A",
-        "url": "https://fbref.com/en/comps/11/{year}/stats/{year}-Serie-A-Stats"
-    },
-    {
-        "name": "Ligue 1",
-        "url": "https://fbref.com/en/comps/13/{year}/stats/{year}-Ligue-1-Stats"
-    },
-    {
-        "name": "Eredivisie",
-        "url": "https://fbref.com/en/comps/23/{year}/stats/{year}-Eredivisie-Stats"
-    },
-    {
-        "name": "Primeira Liga",
-        "url": "https://fbref.com/en/comps/32/{year}/stats/{year}-Primeira-Liga-Stats"
-    },
-    {
-        "name": "Championship",
-        "url": "https://fbref.com/en/comps/10/{year}/stats/{year}-EFL-Championship-Stats"
-    },
-    {
-        "name": "Scottish Premiership",
-        "url": "https://fbref.com/en/comps/40/{year}/stats/{year}-Scottish-Premiership-Stats"
+def get_headers():
+    return {
+        "User-Agent": random.choice(USER_AGENTS),
+        "Accept-Language": "en-US,en;q=0.9",
+        "Accept": "text/html,application/xhtml+xml",
+        "Referer": "https://google.com",
     }
 
-]
-    
-    links = create_links(years, standard_url)
-    print(links)
-    player_links = []
-    rate_limiter = AsyncRateLimiter(max_calls=10, period=60)  # 10 requests per minute
-    
+async def scrape_player_stats(name, url, table_id, session, retries=MAX_RETRIES):
+    warnings.filterwarnings("ignore")
+    headers = get_headers()
+
+    async with semaphore:
+        # Throttle request rate
+        await asyncio.sleep(random.uniform(REQUEST_INTERVAL, REQUEST_INTERVAL + 1))
+
+        try:
+            async with session.get(url, headers=headers, timeout=20) as response:
+                status = response.status
+                print(status, url)
+
+                if status in [403, 429]:
+                    if retries > 0:
+                        retry_after = int(response.headers.get("Retry-After", 10))
+                        print(f"Rate limited ({status}) at {url}, retrying in {retry_after}s")
+                        await asyncio.sleep(retry_after + random.uniform(1, 3))
+                        return await scrape_player_stats(name, url, table_id, session, retries - 1)
+                    else:
+                        print(f"Max retries exceeded for {url}")
+                        return pd.DataFrame()
+
+                html = await response.text()
+
+        except asyncio.TimeoutError:
+            print(f"Timeout for {url}")
+            return pd.DataFrame()
+        except aiohttp.ClientError as e:
+            print(f"Request failed for {url}: {e}")
+            return pd.DataFrame()
+
+    # Parse table synchronously (HTML parsing is CPU-bound anyway)
+    soup = BeautifulSoup(html, 'html.parser')
+    table = soup.find("table", id=table_id) if table_id else soup.find("table", id=None)
+
+    if not table:
+        # Check for commented tables
+        for comment in soup.find_all(string=lambda text: isinstance(text, Comment)):
+            if table_id and table_id in comment:
+                comment_soup = BeautifulSoup(comment, 'html.parser')
+                table = comment_soup.find('table', id=table_id)
+                if table:
+                    print(f"Found {table_id} in comment for {name}")
+                    break
+
+    if not table:
+        print(f"Table not found for {name} ({table_id})")
+        return pd.DataFrame()
+
+    try:
+        df = pd.read_html(str(table), header=1)[0]
+        df['League'] = name
+        return df
+    except Exception as e:
+        print(f"Error parsing table for {name}: {e}")
+        return pd.DataFrame()
+
+async def main(url_jobs):
     async with aiohttp.ClientSession() as session:
-        tasks = [fetch_player_links(session, link, rate_limiter) for link in links]
-        await asyncio.gather(*tasks)
-    
-    player_links = [links for sublist in player_links for links in sublist]
-    print(f"Total player links found: {len(player_links)}")
+        tasks = [
+            scrape_player_stats(job["name"], job["url"], job["table_id"], session)
+            for job in url_jobs
+        ]
+        results = await asyncio.gather(*tasks)
+        return results
 
-    
+# Example usage
+if __name__ == "__main__":
+    jobs = [
+        {"name": "Premier League", "url": "https://fbref.com/en/comps/9/2024-2025/possession/2024-2025-Premier-League-Stats", "table_id": "stats_possession"},
+        {"name": "La Liga", "url": "https://fbref.com/en/comps/12/2024-2025/possession/2024-2025-La-Liga-Stats", "table_id": "stats_possession"},
+        # Add more jobs...
+    ]
 
-
-# Run the async main
-asyncio.run(main())
-
-
-'''
-if table:
-                    links_found = [BASE + a["href"] for a in table.select("td[data-stat='player'] a")]
-                    #print(links_found)
-                    player_links.extend(links_found)
-                    print(f"Found {len(links_found)} players in {url}")
-    '''
+    results = asyncio.run(main(jobs))
+    final_df = pd.concat([df for df in results if not df.empty], ignore_index=True)
+    print(final_df.head())

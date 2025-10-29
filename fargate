@@ -1,0 +1,170 @@
+Got you — here is a **simple, start-to-finish guide** for creating and running a **Fargate task** (no fluff, exact clicks + commands).
+
+---
+
+# ✅ Goal:
+
+Create AWS **Fargate** so it can run your container and send SQS messages (or scrape data).
+
+---
+
+## **Step 1 — Push your Docker image to ECR**
+
+> Only required once. If you already pushed, skip.
+
+1. In AWS Console → search **ECR** → *Create repository*
+
+   * Name: `matchlog-job-generator`
+2. Run these in your terminal (update region + account id):
+
+```bash
+aws ecr get-login-password --region us-east-2 \
+| docker login --username AWS --password-stdin <ACCOUNT_ID>.dkr.ecr.us-east-2.amazonaws.com
+
+docker build -t matchlog-job-generator .
+docker tag matchlog-job-generator:latest <ACCOUNT_ID>.dkr.ecr.us-east-2.amazonaws.com/matchlog-job-generator:latest
+docker push <ACCOUNT_ID>.dkr.ecr.us-east-2.amazonaws.com/matchlog-job-generator:latest
+```
+
+---
+
+## **Step 2 — Create IAM roles for Fargate**
+
+### A) Task Execution Role (pull image + logs)
+
+1. Go to IAM → Roles → Create role
+2. Trusted entity: **Elastic Container Service**
+3. Use case: **Elastic Container Service Task (task execution role)**
+4. Permissions:
+
+   * `AmazonECSTaskExecutionRolePolicy`
+5. Name it: `ecsTaskExecutionRole`
+
+### B) Task Role (SQS permissions)
+
+1. IAM → Create role → Same service (`ecs-tasks.amazonaws.com`)
+2. Add this **inline policy** (replace queue ARN):
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "sqs:SendMessage",
+        "sqs:SendMessageBatch"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:sqs:us-east-2:<ACCOUNT_ID>:football_player_queue"
+      ]
+    }
+  ]
+}
+```
+
+Name it: `ecsJobGeneratorRole`
+
+---
+
+## **Step 3 — Create ECS Cluster**
+
+1. AWS Console → ECS
+2. Click **Create cluster**
+3. Choose **“Networking only (Powered by Fargate)”**
+4. Name: `matchlog-cluster`
+5. ✅ Create
+
+---
+IM OVER HERE!!!!!!!!!!!!!!------------
+## **Step 4 — Create a Task Definition**
+
+1. ECS → Task Definitions → Create new
+
+2. Choose: **FARGATE**
+
+3. Task role: `ecsJobGeneratorRole`
+
+4. Task execution role: `ecsTaskExecutionRole`
+
+5. Container section:
+
+   * Image:
+
+     ```
+     <ACCOUNT_ID>.dkr.ecr.us-east-2.amazonaws.com/matchlog-job-generator:latest
+     ```
+   * Memory: `1GB`
+   * CPU: `0.5 vCPU`
+   * Env Variables:
+
+     ```
+     PLAYER_QUEUE_URL = https://sqs.us-east-2.amazonaws.com/<ACCOUNT_ID>/football_player_queue
+     AWS_REGION = us-east-2
+     ```
+   * Logging:
+
+     * Log driver: **awslogs**
+     * Log group: `/ecs/matchlog-job-generator`
+
+6. ✅ Create
+
+---
+
+## **Step 5 — Run the Fargate Task**
+
+1. ECS → Clusters → `matchlog-cluster`
+2. Click **Run Task**
+3. Launch type: **Fargate**
+4. Task definition: choose the one you made
+5. VPC:
+
+   * Subnets: choose **private** ones if using NAT / public ones if you need public IP
+6. Assign public IP:
+
+   * If scraping public websites → ✅ ENABLE "Auto-assign public IP"
+7. Click **Run Task**
+
+---
+
+## **Step 6 — View logs**
+
+1. Go to CloudWatch → Logs → `/ecs/matchlog-job-generator`
+2. You will see prints from your Python code (including how many SQS messages sent)
+
+---
+
+### 🎉 You're done
+
+Fargate will now run your code, send SQS messages, and exit.
+You only get billed **for the seconds the task is running**.
+
+---
+
+## Optional: Schedule it
+
+ECS → Cluster → Tasks → Create schedule (EventBridge rule: cron / rate)
+
+Example: Run every night at midnight:
+
+```
+cron(0 0 * * ? *)
+```
+
+---
+
+### If you want, I can:
+
+✅ Generate a **full JSON Task Definition** that you can paste directly
+✅ Generate a Terraform version if you deploy via IaC
+✅ Estimate cost vs Lambda vs EC2 for your scraping pipeline
+
+Just say:
+
+> “generate ECS task definition JSON”
+> or
+> “compare cost lambda vs fargate vs ec2”
+
+---
+
+Want me to modify your container to support batch arguments (league, year) via env variables?
