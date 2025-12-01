@@ -1,0 +1,170 @@
+Cool — here is **Option B (the reliable fix)** explained clearly and step-by-step so you can do it in under 10 minutes.
+
+Option B = **give Fargate its own dedicated outbound IP** using a NAT Gateway + Elastic IP.
+
+This solves the problem because:
+
+* FBref is blocking the shared AWS IP you’re currently using
+* When you own your own IP, you can rotate it or whitelist it
+
+---
+
+# ✅ Architecture after the fix
+
+```
+Fargate task → private subnet → NAT Gateway (your EIP) → internet
+```
+
+So the task always hits the web using the IP you control.
+
+You already have public subnets, so we will add 1 private subnet + NAT.
+
+---
+
+# 🔧 Step-by-step instructions
+
+---
+
+## STEP 1 — Create a new Elastic IP
+
+AWS Console:
+
+```
+VPC → Elastic IP addresses → Allocate Elastic IP
+```
+
+Done. Keep that IP; we'll use it next.
+
+---
+
+## STEP 2 — Create a NAT Gateway
+
+AWS Console:
+
+```
+VPC → NAT Gateways → Create NAT Gateway
+```
+
+Settings:
+
+* Subnet: choose one of your existing subnets
+* Elastic IP: pick the one you just created
+
+Create.
+
+---
+
+## STEP 3 — Update your route table
+
+You need a route table for your Fargate subnet that sends outbound through NAT.
+
+Go to:
+
+```
+VPC → Route tables
+```
+
+Pick the route table of the subnet where your Fargate task runs.
+
+Edit route:
+
+### Change this:
+
+```
+0.0.0.0/0 → igw-xxxxxx
+```
+
+### to this:
+
+```
+0.0.0.0/0 → nat-xxxxxxx
+```
+
+Save.
+
+That means traffic goes:
+
+```
+Fargate → NAT → internet
+```
+
+instead of using the original AWS public IP.
+
+---
+
+## STEP 4 — NO change to your ECS task definition
+
+Do NOT touch:
+
+* Public IP assignment
+* Security groups
+* Subnet list
+
+Keep all your Fargate config the same.
+
+The routing alone takes effect.
+
+---
+
+## STEP 5 — Redeploy your ECS Service
+
+Redeploy the service so the ENI gets recreated.
+
+---
+
+# 🧪 STEP 6 — Verify your new outbound IP
+
+Add this temporary debug in your Python:
+
+```python
+print(requests.get("https://api.ipify.org").text)
+```
+
+You should see the NEW IP (the Elastic IP),
+not the old AWS pool IP.
+
+If you see your EIP → you win.
+
+---
+
+# 💯 RESULT
+
+Now requests to fbref will come from a single clean IP you control.
+No more random “blocked AWS range”.
+
+And if it ever gets blocked in future?
+
+Just press:
+
+```
+Disassociate EIP → get a new one
+```
+
+and you instantly rotate IP.
+
+---
+
+---
+
+# ⭐ Bonus tip
+
+If you want the absolutely cleanest design:
+
+* Put Fargate **only in private subnets**
+* Internet only through NAT gateway
+
+This is actually the recommended AWS pattern.
+
+---
+
+---
+
+# If you want, I can check the exact config
+
+Just tell me:
+
+1. Which subnet your Fargate task is running in?
+2. Is your Fargate Service or Scheduled task?
+3. Do you want help turning the task subnet into a private subnet? (1 minute fix)
+
+I can draw you the full working architecture in detail if you want.
