@@ -168,3 +168,6 @@ Just tell me:
 3. Do you want help turning the task subnet into a private subnet? (1 minute fix)
 
 I can draw you the full working architecture in detail if you want.
+
+print("IP:", requests.get("https://api.ipify.org").text)
+
