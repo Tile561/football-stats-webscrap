@@ -171,3 +171,8 @@ I can draw you the full working architecture in detail if you want.
 
 print("IP:", requests.get("https://api.ipify.org").text)
 
+import requests
+
+ip = requests.get("https://api.ipify.org").text
+print("My public IP:", ip)
+
